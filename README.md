@@ -4,13 +4,13 @@ This extension provide bookmarklet functionality for your Google Chrome browser.
 
 ### Installation
 
+#### From source
+
     git clone git@github.com:vcuculo/diaspora-chrome-publisher.git
   
-In Chrome, go to Wrench > Tools > Extensions > Developer Mode
-Click on "Load unpacked extension" and select diaspora-chrome-publisher folder.
+In Chrome, go to `Wrench > Tools > Extensions > Developer Mode`
+Click on `Load unpacked extension` and select diaspora-chrome-publisher folder.
 
-Or go to
+#### From Chrome Web Store
 
    http://goo.gl/tmeFB
-
-and install it!
