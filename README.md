@@ -1,6 +1,6 @@
 ## Diaspora* Publisher for Google Chrome
 
-This extension provide bookmarklet functionality for your Google Chrome browser.
+This extension provides bookmarklet functionality for your Google Chrome browser.
 
 ### Installation
 

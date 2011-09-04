@@ -10,6 +10,6 @@
 	],
   	"browser_action": {
     	"default_title": "Publish this page on Diaspora*",
-    	"default_icon": "info-16.png"
+    	"default_icon": "icon.png"
   }
 }
