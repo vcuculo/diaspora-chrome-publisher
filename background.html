@@ -1,0 +1,96 @@
+<!--
+ * Diaspora* Publisher extension.
+ * Based on Email this page (by Google) extension
+ * http://code.google.com/chrome/extensions/samples.html#028eb5364924344029bcbe1d527f132fc72b34e5
+ * Author: Vittorio Cuculo <vittorio.cuculo@gmail.com>
+ * Diaspora: lasek@diaspora.eigenlab.org
+ *
+ * Copyright (c) 2009 The Chromium Authors. All rights reserved.  Use of this
+ * source code is governed by a BSD-style license that can be found in the
+ * LICENSE file.
+-->
+<html>
+<head>
+<script src="http://call.jsonlib.com/jsonlib.js"></script>
+<script>
+function googlurl(url, cb) {
+  jsonlib.fetch({
+    url: 'https://www.googleapis.com/urlshortener/v1/url',
+    header: 'Content-Type: application/json',
+    data: JSON.stringify({longUrl: url})
+  }, function (m) {
+    var result = null;
+    try {
+      result = JSON.parse(m.content).id;
+      if (typeof result != 'string') result = null;
+    } catch (e) {
+      result = null;
+    }
+    cb(result);
+  });
+}
+
+  function getPodUrl() {
+    if (window.localStorage == null)
+      return "";
+    if (window.localStorage.podUrl == null)
+      return "";
+    return window.localStorage.podUrl;
+  }
+
+  function postMessage(tab_id, subject, body, selection) {
+    var default_handler = getPodUrl();
+    if (default_handler == ""){
+	alert("Set your Diaspora* Pod Url before use.");
+	chrome.tabs.create({url : "options.html"});
+	return;
+    }
+    var action_url = default_handler + "/bookmarklet?";
+    if (subject.length > 0)
+      action_url += "title=" + encodeURIComponent(subject);
+
+    if (body.length > 0) {
+      action_url += "&url=" + encodeURIComponent(body);
+
+      // Append the current selection to the end of the text message.
+      if (selection.length > 0) {
+        action_url += "&notes=" + encodeURIComponent(selection);
+      }
+    }
+    action_url += "&v=1&";
+
+    if( !window.open(action_url+'noui=1&jump=doclose','diasporav1','location=yes,links=no,scrollbars=no,toolbar=no,width=590,height=250'))
+	location.href = action_url+'jump=yes';
+  }
+
+  chrome.extension.onConnect.addListener(function(port) {
+    var tab = port.sender.tab;
+    
+    // This will get called by the content script we execute in
+    // the tab as a result of the user pressing the browser action.
+    port.onMessage.addListener(function(info) {
+      var max_length = 1024;
+      var max_url_length = 25;
+      if (info.selection.length > max_length)
+        info.selection = info.selection.substring(0, max_length);
+      if (tab.url.length > max_url_length)
+      	googlurl(tab.url, function(s) { postMessage(tab.id, info.title, s, info.selection); });
+      else
+        postMessage(tab.id, info.title, tab.url, info.selection);
+    });
+  });
+
+  // Called when the user clicks on the browser action icon.
+  chrome.browserAction.onClicked.addListener(function(tab) {
+    // We can only inject scripts to find the title on pages loaded with http
+    // and https so for all other pages, we don't ask for the title.
+    if (tab.url.indexOf("http:") != 0 &&
+        tab.url.indexOf("https:") != 0) {
+      postMessage(tab.id, "", tab.url, "");
+    } else {
+      chrome.tabs.executeScript(null, {file: "content_script.js"});
+    }
+  });
+</script>
+</head>
+</html>

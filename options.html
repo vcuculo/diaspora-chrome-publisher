@@ -1,0 +1,76 @@
+<!DOCTYPE>
+<!--
+ * Diaspora* Publisher extension.
+ * Based on Email this page (by Google) extension
+ * http://code.google.com/chrome/extensions/samples.html#028eb5364924344029bcbe1d527f132fc72b34e5
+ * Author: Vittorio Cuculo <vittorio.cuculo@gmail.com>
+ * Diaspora: lasek@diaspora.eigenlab.org
+ *
+ * Copyright (c) 2009 The Chromium Authors. All rights reserved.  Use of this
+ * source code is governed by a BSD-style license that can be found in the
+ * LICENSE file.
+-->
+<html>
+<head>
+  <title>Options for the Diaspora* Publisher extension</title>
+<style>
+#podSelection {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 10pt;
+}
+</style>
+<script>
+function show(id, yes){
+  if (yes)
+	document.getElementById(id).style.display="block";
+  else
+     	document.getElementById(id).style.display="none";
+}
+
+function submit() {
+  if (window.localStorage == null) {
+    alert('Local storage is required for changing pod url');
+    return;
+  }
+  if (document.getElementById('pod').value != ""){
+	window.localStorage.podUrl = document.getElementById('pod').value;
+ 	document.getElementById('pod').placeholder = document.getElementById('pod').value;
+  }
+  show('ok', 1);
+}
+
+function main() {
+  if (window.localStorage == null) {
+    alert("LocalStorage must be enabled for changing options.");
+    return;
+  }
+
+  if (window.localStorage.podUrl != null)
+    document.getElementById('pod').placeholder = window.localStorage.podUrl;
+  else
+    document.getElementById('pod').placeholder = "http://diaspora.eigenlab.org";
+}
+</script>
+</head>
+<body onload="main()">
+<table border="0">
+<tr>
+  <td rowspan="2" valign="top" align="center" width="80">
+    <img src="info-48.png"/>
+  </td>
+  <td height="48"></td>
+</tr>
+<tr>
+  <td valign="center">
+    <form id="podSelection" action="javascript:submit();">
+    <strong>Insert your Diaspora* Pod url, as in the example below:</strong>
+    <br /><br />
+    <input id="pod" type="url" name="podurl" size="30" onFocus="show('ok', 0);">
+    <input type="submit">
+    <img id="ok" src="ok.png" style="display:none;">
+    </form>
+  </td>
+</tr>
+</table>
+</body>
+</html>
