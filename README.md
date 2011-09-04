@@ -1,8 +1,8 @@
-== Diaspora* Publisher for Google Chrome ==
+## Diaspora* Publisher for Google Chrome
 
 This extension provide bookmarklet functionality for your Google Chrome browser.
 
-=== Installation ===
+### Installation
 
     git clone git@github.com:vcuculo/diaspora-chrome-publisher.git
   
