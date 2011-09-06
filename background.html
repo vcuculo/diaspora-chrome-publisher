@@ -39,8 +39,8 @@ function googlurl(url, cb) {
   }
 
   function postMessage(tab_id, subject, body, selection) {
-    var default_handler = getPodUrl();
-    if (default_handler == ""){
+    var default_handler = "http://" + getPodUrl();
+    if (default_handler == "http://"){
 	alert("Set your Diaspora* Pod Url before use.");
 	chrome.tabs.create({url : "options.html"});
 	return;

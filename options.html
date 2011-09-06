@@ -19,6 +19,7 @@
   font-size: 10pt;
 }
 </style>
+<script type="text/javascript" src="jquery-1.6.2.min.js"></script>
 <script>
 function show(id, yes){
   if (yes)
@@ -39,16 +40,31 @@ function submit() {
   show('ok', 1);
 }
 
+function combo(thelist, theinput) {
+  theinput = document.getElementById(theinput);  
+  var idx = thelist.selectedIndex;
+  var content = thelist.options[idx].innerHTML;
+  theinput.value = content;	
+}
+
 function main() {
   if (window.localStorage == null) {
     alert("LocalStorage must be enabled for changing options.");
     return;
   }
 
+  $.get("podlist.txt", function(data) {
+        var filePod = data.split("\n");;
+        $.each(filePod, function() {
+           $("#podlist").append('<option value="'+ this +'">'+ this +'</option>');
+	});
+  });
+
+
   if (window.localStorage.podUrl != null)
     document.getElementById('pod').placeholder = window.localStorage.podUrl;
   else
-    document.getElementById('pod').placeholder = "http://diaspora.eigenlab.org";
+    document.getElementById('pod').placeholder = "diaspora.eigenlab.org";
 }
 </script>
 </head>
@@ -63,9 +79,14 @@ function main() {
 <tr>
   <td valign="center">
     <form id="podSelection" action="javascript:submit();">
-    <strong>Insert your Diaspora* Pod url, as in the example below:</strong>
+    <strong>Choose your Diaspora* Pod url, or insert a new one:</strong>
     <br /><br />
-    <input id="pod" type="url" name="podurl" size="30" onFocus="show('ok', 0);">
+
+    <input id="pod" name="podurl" size="30" onFocus="show('ok', 0);">
+
+    <select id="podlist" onChange="combo(this, 'pod')">
+        <option>Please choose from above</option>
+    </select>
     <input type="submit">
     <img id="ok" src="ok.png" style="display:none;">
     </form>
