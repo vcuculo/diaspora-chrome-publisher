@@ -39,12 +39,17 @@ function googlurl(url, cb) {
   }
 
   function postMessage(tab_id, subject, body, selection) {
-    var default_handler = "http://" + getPodUrl();
-    if (default_handler == "http://"){
+    var default_handler = getPodUrl();
+
+    if (default_handler == ""){
 	alert("Set your Diaspora* Pod Url before use.");
 	chrome.tabs.create({url : "options.html"});
 	return;
     }
+
+    if (default_handler.indexOf("http") == -1)
+	default_handler = "http://".concat(default_handler);
+
     var action_url = default_handler + "/bookmarklet?";
     if (subject.length > 0)
       action_url += "title=" + encodeURIComponent(subject);

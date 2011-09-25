@@ -1,7 +1,7 @@
 {
 	"name": "Diaspora* Publisher",
 	"description": "Share your favourite pages with your Diaspora* friends. Customizable with your own Diaspora* Pod.",
-	"version": "1.1.1",
+	"version": "1.2.1",
   	"background_page": "background.html",
 	"icons": { "48": "info-48.png" },
   	"options_page": "options.html",
