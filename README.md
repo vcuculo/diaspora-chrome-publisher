@@ -1,6 +1,7 @@
 ## Diaspora* Publisher for Google Chrome
 
 This extension provides bookmarklet functionality for your Google Chrome browser.
+Updated pod list in options page is from http://podupti.me/, thanks to dmorley.
 
 ### Installation
 
