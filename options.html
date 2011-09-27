@@ -4,7 +4,7 @@
  * Based on Email this page (by Google) extension
  * http://code.google.com/chrome/extensions/samples.html#028eb5364924344029bcbe1d527f132fc72b34e5
  * Author: Vittorio Cuculo <vittorio.cuculo@gmail.com>
- * Diaspora: lasek@diaspora.eigenlab.org
+ * Diaspora: vcuculo@diaspora.eigenlab.org
  *
  * Copyright (c) 2009 The Chromium Authors. All rights reserved.  Use of this
  * source code is governed by a BSD-style license that can be found in the
@@ -20,7 +20,13 @@
 }
 </style>
 <script type="text/javascript" src="jquery-1.6.2.min.js"></script>
+<script src="http://call.jsonlib.com/jsonlib.js"></script>
 <script>
+
+var remoteList		= "http://api.podupti.me/api.php?key=4r45tg";
+var localList		= "podlist.txt";
+var defaultPlaceholder	= "https://diaspora.eigenlab.org";
+
 function show(id, yes){
   if (yes)
 	document.getElementById(id).style.display="block";
@@ -43,28 +49,47 @@ function submit() {
 function combo(thelist, theinput) {
   theinput = document.getElementById(theinput);  
   var idx = thelist.selectedIndex;
-  var content = thelist.options[idx].innerHTML;
+  var content = thelist.options[idx].value;
   theinput.value = content;	
 }
 
+function updatePodsRemotely() {
+  $.get(remoteList, function(data) {
+        var remotefilePod = data.split(",");
+        $.each(remotefilePod, function() {
+           start = this.indexOf("/") + 2;
+           end = this.indexOf(" ");
+	   podValue = this.substring(0 , end);
+           podName = this.substring(start , end);
+           $("#podlist").append('<option value="'+ podValue +'">'+ podName +'</option>');
+	}); // if remote podlist is unreachable, load local podlist
+  }).error(function() { updatePodsLocally();});
+}
+
+function updatePodsLocally(){
+      $.get(localList, function(data) {
+          var filePod = data.split("\n");
+          $.each(filePod, function() {
+             start = this.indexOf("/") + 2;
+             podName = this.substring(start);
+             $("#podlist").append('<option value="'+ this +'">'+ podName +'</option>');
+  	  });
+      });
+}
+
 function main() {
+  
   if (window.localStorage == null) {
-    alert("LocalStorage must be enabled for changing options.");
+     alert("LocalStorage must be enabled for changing options.");
     return;
   }
 
-  $.get("podlist.txt", function(data) {
-        var filePod = data.split("\n");;
-        $.each(filePod, function() {
-           $("#podlist").append('<option value="'+ this +'">'+ this +'</option>');
-	});
-  });
-
+  updatePodsRemotely();
 
   if (window.localStorage.podUrl != null)
     document.getElementById('pod').placeholder = window.localStorage.podUrl;
   else
-    document.getElementById('pod').placeholder = "diaspora.eigenlab.org";
+    document.getElementById('pod').placeholder = defaultPlaceholder;
 }
 </script>
 </head>
@@ -72,7 +97,7 @@ function main() {
 <table border="0">
 <tr>
   <td rowspan="2" valign="top" align="center" width="80">
-    <img src="info-48.png"/>
+    <img src="icon.png"/>
   </td>
   <td height="48"></td>
 </tr>
