@@ -42,7 +42,7 @@ function googlurl(url, cb) {
     var default_handler = getPodUrl();
 
     if (default_handler == ""){
-	alert("Set your Diaspora* Pod Url before use.");
+	alert(chrome.i18n.getMessage("setPodUrl"));
 	chrome.tabs.create({url : "options.html"});
 	return;
     }

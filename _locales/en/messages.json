@@ -1,22 +1,26 @@
 {
   "extDescription": {
     "message": "Share your favourite pages with your Diaspora* friends. Customizable with your own Diaspora* Pod.",
-    "description": "Extension description."
+    "description": "Text: Extension description."
   },
   "localStorage": {
     "message": "LocalStorage is required for changing pod url.",
-    "description": "Alert if localstorage not supported"
+    "description": "Alert: Localstorage not supported"
   },
   "urlSaved": {
     "message": "Pod Url saved!",
-    "description": "Notification in options page"
+    "description": "Alert: Notification in options page"
   },
   "choosePod": {
-    "message": "Insert your DIASPORA* pod:",
-    "description": "Choose your Diaspora* Pod url, or insert a new one:"
+    "message": "Insert your Diaspora* pod:",
+    "description": "Text: Choose your Diaspora* Pod url, or insert a new one:"
   },
   "optionsTitle": {
     "message": "Options for the Diaspora* Publisher extension",
-    "description": "Options for the Diaspora* Publisher extension"
+    "description": "Title: Options for the Diaspora* Publisher extension"
+  },
+  "optionsTitle": {
+    "message": "Set your Diaspora* pod before use.",
+    "description": "Alert: Set your Diaspora* Pod Url before use."
   }
 }
