@@ -12,38 +12,59 @@
 -->
 <html>
 <head>
-  <title>Options for the Diaspora* Publisher extension</title>
+  <title></title>
 <style>
-#podSelection {
-  font-family: Helvetica, Arial, sans-serif;
-  font-size: 10pt;
+.b1, .b2, .b3, .b4{font-size:1px; overflow:hidden; display:block;}
+.b1 {height:1px; background:#888; margin:0 5px;}
+.b2 {height:1px; background:#ddd; border-right:2px solid #888; border-left:2px solid #888; margin:0 3px;}
+.b3 {height:1px; background:#ddd; border-right:1px solid #888; border-left:1px solid #888; margin:0 2px;}
+.b4 {height:2px; background:#ddd; border-right:1px solid #888; border-left:1px solid #888; margin:0 1px;}
+.contentb {margin: auto;background: #ddd; border-right:1px solid #888; border-left:1px solid #888;}
+.contentb div {margin-left: 5px;font-size: 30px;font-family: Helvetica, Arial, sans-serif;}
+#html, body {
+ position: absolute;
+ top: 25%;
+ left: 25%;
+ width: 50%;
+ height: 50%;
+ background-color: #CCC;
+ padding: 5px;
 }
 </style>
-<script type="text/javascript" src="jquery-1.6.2.min.js"></script>
-<script src="http://call.jsonlib.com/jsonlib.js"></script>
+<link type="text/css" href="css/smoothness/jquery-ui-1.8.16.custom.css" rel="Stylesheet" />	
+<script type="text/javascript" src="js/jquery-1.6.2.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.8.16.custom.min.js"></script>
 <script>
 
-var remoteList		= "http://api.podupti.me/api.php?key=4r45tg";
+var remoteList		= "http://podupti.me/api.php?key=4r45tg";
 var localList		= "podlist.txt";
 var defaultPlaceholder	= "https://diaspora.eigenlab.org";
+var pods = new Array();
 
-function show(id, yes){
-  if (yes)
-	document.getElementById(id).style.display="block";
-  else
-     	document.getElementById(id).style.display="none";
+function localize() {
+  document.title = chrome.i18n.getMessage("optionsTitle");
+  $("#choosePod").html(chrome.i18n.getMessage("choosePod"));
+  $("#chooseAbove").html(chrome.i18n.getMessage("chooseAbove"));
 }
 
 function submit() {
-  if (window.localStorage == null) {
-    alert('Local storage is required for changing pod url');
-    return;
-  }
   if (document.getElementById('pod').value != ""){
 	window.localStorage.podUrl = document.getElementById('pod').value;
  	document.getElementById('pod').placeholder = document.getElementById('pod').value;
   }
-  show('ok', 1);
+  var notification = webkitNotifications.createNotification(
+  'icon.png',  // icon url
+  chrome.i18n.getMessage("urlSaved"),  // notification title
+  ''  // notification body text
+  );
+
+  notification.ondisplay = function() {
+  setTimeout(function() {
+    notification.cancel();
+  }, 1000);
+  };
+
+  notification.show();
 }
 
 function combo(thelist, theinput) {
@@ -54,6 +75,8 @@ function combo(thelist, theinput) {
 }
 
 function updatePodsRemotely() {
+
+  var i = 0;
   $.get(remoteList, function(data) {
         var remotefilePod = data.split(",");
         $.each(remotefilePod, function() {
@@ -61,26 +84,30 @@ function updatePodsRemotely() {
            end = this.indexOf(" ");
 	   podValue = this.substring(0 , end);
            podName = this.substring(start , end);
-           $("#podlist").append('<option value="'+ podValue +'">'+ podName +'</option>');
+           pods[i++] = podValue;
 	}); // if remote podlist is unreachable, load local podlist
+        $("input#pod").autocomplete({source: pods});
   }).error(function() { updatePodsLocally();});
 }
 
 function updatePodsLocally(){
+    var i = 0;
       $.get(localList, function(data) {
           var filePod = data.split("\n");
           $.each(filePod, function() {
              start = this.indexOf("/") + 2;
              podName = this.substring(start);
-             $("#podlist").append('<option value="'+ this +'">'+ podName +'</option>');
+             pods[i++] = podValue;
   	  });
+          $("input#pod").autocomplete({source: pods}); 
       });
 }
 
 function main() {
-  
+  localize();
+
   if (window.localStorage == null) {
-     alert("LocalStorage must be enabled for changing options.");
+    alert(chrome.i18n.getMessage("localStorage"));
     return;
   }
 
@@ -91,32 +118,22 @@ function main() {
   else
     document.getElementById('pod').placeholder = defaultPlaceholder;
 }
+
 </script>
 </head>
 <body onload="main()">
-<table border="0">
-<tr>
-  <td rowspan="2" valign="top" align="center" width="80">
-    <img src="icon.png"/>
-  </td>
-  <td height="48"></td>
-</tr>
-<tr>
-  <td valign="center">
-    <form id="podSelection" action="javascript:submit();">
-    <strong>Choose your Diaspora* Pod url, or insert a new one:</strong>
-    <br /><br />
-
-    <input id="pod" name="podurl" size="30" onFocus="show('ok', 0);">
-
-    <select id="podlist" onChange="combo(this, 'pod')">
-        <option>Please choose from above</option>
-    </select>
-    <input type="submit">
-    <img id="ok" src="ok.png" style="display:none;">
+<center>
+<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
+    <div class="contentb">
+    <form action="javascript:submit();">
+    	<strong><div id="choosePod"></div></strong>
+    	<br><br>
+    	<input id="pod" name="podurl" size="30" style="font-size: 30px;" class="ui-autocomplete-input"><input type="submit" style="font-size: 30px;">
+    	<br><br>
     </form>
-  </td>
-</tr>
-</table>
+    <br>
+    </div>
+<b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b>
+</center>
 </body>
 </html>
