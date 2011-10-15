@@ -3,6 +3,10 @@
     "message": "Share your favourite pages with your Diaspora* friends. Customizable with your own Diaspora* Pod.",
     "description": "Text: Extension description."
   },
+  "extAction": {
+    "message": "Publish this page on Diaspora",
+    "description": "Hover: Extension action when hover icon."
+  },
   "localStorage": {
     "message": "LocalStorage is required for changing pod url.",
     "description": "Alert: Localstorage not supported"
@@ -19,7 +23,7 @@
     "message": "Options for the Diaspora* Publisher extension",
     "description": "Title: Options for the Diaspora* Publisher extension"
   },
-  "optionsTitle": {
+  "setPodUrl": {
     "message": "Set your Diaspora* pod before use.",
     "description": "Alert: Set your Diaspora* Pod Url before use."
   }
