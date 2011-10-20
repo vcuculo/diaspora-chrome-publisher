@@ -45,6 +45,7 @@ function localize() {
   document.title = chrome.i18n.getMessage("optionsTitle");
   $("#choosePod").html(chrome.i18n.getMessage("choosePod"));
   $("#chooseAbove").html(chrome.i18n.getMessage("chooseAbove"));
+  $("label[id='addImage']").append(chrome.i18n.getMessage("addImage"));
 }
 
 function submit() {
@@ -52,6 +53,10 @@ function submit() {
 	window.localStorage.podUrl = document.getElementById('pod').value;
  	document.getElementById('pod').placeholder = document.getElementById('pod').value;
   }
+  else
+  	window.localStorage.podUrl = document.getElementById('pod').placeholder;
+  window.localStorage.images = document.getElementById('images').checked;
+
   var notification = webkitNotifications.createNotification(
   'icon.png',  // icon url
   chrome.i18n.getMessage("urlSaved"),  // notification title
@@ -65,6 +70,10 @@ function submit() {
   };
 
   notification.show();
+}
+
+function saveOption(){
+  window.localStorage.images = document.getElementById('images').checked;
 }
 
 function combo(thelist, theinput) {
@@ -117,6 +126,9 @@ function main() {
     document.getElementById('pod').placeholder = window.localStorage.podUrl;
   else
     document.getElementById('pod').placeholder = defaultPlaceholder;
+
+  if (window.localStorage.images != null)
+    document.getElementById('images').checked = window.localStorage.images;
 }
 
 </script>
@@ -132,6 +144,7 @@ function main() {
     	<br><br>
     </form>
     <br>
+    <label id="addImage" for="images" style="font-family: Helvetica, Arial, sans-serif;"><input id="images" type="checkbox" onClick="javascript:saveOption()"></label>
     </div>
 <b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b>
 </center>

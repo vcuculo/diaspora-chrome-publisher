@@ -26,5 +26,9 @@
   "setPodUrl": {
     "message": "Inserisci il tuo pod di Diaspora*.",
     "description": "Alert: Set your Diaspora* Pod Url before use."
+  },
+  "addImage": {
+    "message": "Aggiungi un immagine, quando disponibile.",
+    "description": "Add images in markdown format when <link rel=\"image_src\"> present in the page."
   }
 }
