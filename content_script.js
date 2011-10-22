@@ -5,13 +5,16 @@
  */
 
 var links = document.getElementsByTagName("link");
+var images = document.getElementsByTagName("img");
 var image;
 for (var i=0; i<links.length; i++) {
  if (links[i].getAttribute("rel") == "image_src"){
    image = links[i].getAttribute("href");
    break;
- }	
+ }
 }
+if(image == null && images.length == 1)
+   image = images[0].getAttribute("src");
 
 var additionalInfo = {
   "title": document.title,

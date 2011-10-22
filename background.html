@@ -74,7 +74,7 @@ function googlurl(url, cb) {
 
     var action_url = podUrl + "/bookmarklet?";
     if (subject.length > 0)
-      action_url += "title=" + encodeURIComponent(subject);
+      action_url += "title=" + encodeURIComponent(addslashes(subject));
 
     if (url.length > 0) {
       action_url += "&url=" + encodeURIComponent(url);
