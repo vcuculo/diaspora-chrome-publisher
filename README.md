@@ -32,4 +32,8 @@ A message appears as
 
 where `message` is the text that appears in extension, and `description` is just a field with the meaning of text.
 
+### Donate
+
 [![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=mynameislasek&url=https://github.com/vcuculo/diaspora-chrome-publisher&title=Diaspora* Publisher&language=en_GB&tags=github&category=software) 
+or
+BitCoin : `1HZXuviL744rqTzzExhkkYDcGQdx2QWsZc`
