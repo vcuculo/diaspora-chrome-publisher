@@ -1,16 +1,16 @@
 {
-	"name": "Diaspora* Publisher",
-	"description": "__MSG_extDescription__",
-	"version": "1.4.2",
+        "name": "Diaspora* Publisher",
+        "description": "__MSG_extDescription__",
+        "version": "1.4.3",
         "default_locale": "en",
-  	"background_page": "background.html",
-	"icons": { "48": "icon.png" },
-  	"options_page": "options.html",
-	"permissions": [
-	   "tabs", "http://*/*", "https://*/*", "notifications"
-	],
-  	"browser_action": {
-    	"default_title": "__MSG_extAction__*",
-    	"default_icon": "icon.png"
-  }
+        "background_page": "background.html",
+        "icons": { "48": "icon.png" },
+        "options_page": "options.html",
+        "permissions": [
+          "tabs", "http://*/*", "https://*/*", "notifications"
+        ],
+        "browser_action": {
+          "default_title": "__MSG_extAction__*",
+          "default_icon": "icon.png"
+        },
 }
