@@ -16,6 +16,18 @@ for (var i=0; i<links.length; i++) {
 }
 if(image == null && images.length == 1)
    image = images[0].getAttribute("src");
+else
+  chooseImage(images);
+
+function chooseImages(images){
+  var html = '<div class="ui-overlay"><div class="ui-widget-overlay"></div><table><tr>';
+  for (var i=0; i<images.length; i++){
+    if (i%3 == 0)
+      html += '</tr><tr>';
+    html += <td><img src="'+ images[i].getAttribute("src") +'"></td>";
+  }
+  $("body").append(html);
+}
 
 var additionalInfo = {
   "title": document.title,
