@@ -6,7 +6,8 @@
 
 var links = document.getElementsByTagName("link");
 var images = document.getElementsByTagName("img");
-var image;
+var image = null;
+
 for (var i=0; i<links.length; i++) {
  if (links[i].getAttribute("rel") == "image_src"){
    image = links[i].getAttribute("href");
