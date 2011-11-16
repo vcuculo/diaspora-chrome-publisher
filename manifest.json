@@ -13,9 +13,11 @@
       "default_title": "__MSG_extAction__*",
       "default_icon": "icon.png"
     },
-    "content_scripts": [{
+    "content_scripts": [
+      {
         "matches": ["http://*/*"],
-        "css": ["css/smoothness/jquery-ui-1.8.16.custom.css"],
-        "js": ["js/jquery-1.6.2.min.js","js/jquery-ui-1.8.16.custom.min.js"]
-    }]
+        "css": ["css/smoothness/jquery-ui-1.8.16.custom.css", "css/thumbs.css"],
+        "js": ["js/jquery-1.6.2.min.js", "js/jquery-ui-1.8.16.custom.min.js"]
+      }
+    ]
 }

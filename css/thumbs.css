@@ -1,0 +1,54 @@
+ul#thumbs, ul#thumbs li{
+  margin:0;
+  padding:0;
+  list-style:none;
+}
+ul#thumbs li{
+  float:left;
+  margin-right:5px;
+  border:1px solid #999;
+  padding:2px;
+}
+ul#thumbs a:hover img{
+  border:1px solid #999;
+  background:#fff;
+  padding:2px;
+}
+ul#thumbs:after, li#thumbs:after{
+  content:".";
+  display:block;
+  height:0;
+  clear:both;
+  visibility:hidden;
+}
+ul#thumbs, li#thumbs{
+  display:block;
+}
+ul#thumbs, li#thumbs{
+  min-height:1%;
+}
+* html ul#thumbs, * html li#thumbs{
+  height:1%;
+}
+
+ul#thumbs a{
+  display:block;
+  float:left;
+  width:100px;
+  height:100px;
+  line-height:100px;
+  overflow:hidden;
+  position:relative;
+  z-index:1;		
+}
+ul#thumbs a img{
+  float:left;
+  position:absolute;
+  top:-20px;
+  left:-50px;	
+}
+ul#thumbs a:hover{
+  overflow:visible;
+  z-index:1000;
+  border:none;		
+}
