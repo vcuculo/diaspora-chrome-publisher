@@ -11,117 +11,119 @@
 -->
 <html>
 <head>
-<script src="js/jsonlib-src.js"></script>
+<script type="text/javascript" src="js/jquery.min.js"></script>
 <script>
 
 var podUrl = "";
 var images = false;
 
 function googlurl(url, cb) {
-  jsonlib.fetch({
-    url: 'https://www.googleapis.com/urlshortener/v1/url',
-    header: 'Content-Type: application/json',
-    data: JSON.stringify({longUrl: url})
-  }, function (m) {
-    var result = null;
-    try {
-      result = JSON.parse(m.content).id;
-      if (typeof result != 'string') result = null;
-    } catch (e) {
-      result = null;
+  $.ajax({
+    type: 'POST',
+    url: "https://www.googleapis.com/urlshortener/v1/url",
+    contentType: 'application/json',
+    data: JSON.stringify({longUrl: url}),
+    success: function (m) {
+      var result = null;
+      try {
+        result = m.id;
+        if (typeof result != 'string') result = null;
+      } catch (e) {
+        result = null;
+      }
+      cb(result);
     }
-    cb(result);
   });
 }
 
-  function getOptions() {
-    if (window.localStorage != null && window.localStorage.podUrl != null && window.localStorage.images != null){
-      podUrl = window.localStorage.podUrl;
-      images = window.localStorage.images; 
-      return;
-    }
+function getOptions() {
+  if (window.localStorage != null && window.localStorage.podUrl != null && window.localStorage.images != null){
+    podUrl = window.localStorage.podUrl;
+    images = window.localStorage.images; 
+    return;
   }
+}
   
 
-  function addslashes( str ) {  
-    // Escapes single quote, double quotes and backslash characters in a string with backslashes    
-    //   
-    // version: 810.114  
-    // discuss at: http://phpjs.org/functions/addslashes  
-    // +   original by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)  
-    // +   improved by: Ates Goral (http://magnetiq.com)  
-    // +   improved by: marrtins  
-    // +   improved by: Nate  
-    // +   improved by: Onno Marsman  
-    // *     example 1: addslashes("kevin's birthday");  
-    // *     returns 1: 'kevin\'s birthday'  
-   
-    return (str+'').replace(/([\\"'])/g, "\\$1").replace(/\0/g, "\\0");  
-  }
+function addslashes( str ) {  
+  // Escapes single quote, double quotes and backslash characters in a string with backslashes    
+  //   
+  // version: 810.114  
+  // discuss at: http://phpjs.org/functions/addslashes  
+  // +   original by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)  
+  // +   improved by: Ates Goral (http://magnetiq.com)  
+  // +   improved by: marrtins  
+  // +   improved by: Nate  
+  // +   improved by: Onno Marsman  
+  // *     example 1: addslashes("kevin's birthday");  
+  // *     returns 1: 'kevin\'s birthday'  
+ 
+  return (str+'').replace(/([\\"'])/g, "\\$1").replace(/\0/g, "\\0");  
+}
   
-  function postMessage(tab_id, subject, url, selection, image) {
+function postMessage(tab_id, subject, url, selection, image) {
 
-    getOptions();
+  getOptions();
 
-    if (podUrl == ""){
-	alert(chrome.i18n.getMessage("setPodUrl"));
-	chrome.tabs.create({url : "options.html"});
-	return;
-    }
-
-    if (podUrl.indexOf("http") == -1)
-	podUrl = "http://".concat(podUrl);
-
-    var action_url = podUrl + "/bookmarklet?";
-    if (subject.length > 0)
-      action_url += "title=" + encodeURIComponent(addslashes(subject));
-
-    if (url.length > 0) {
-      action_url += "&url=" + encodeURIComponent(url);
-
-      // Append the current selection to the end of the text message.
-      if (selection.length > 0) {
-        action_url += "&notes=" + encodeURIComponent(addslashes(selection));
-      }
-      if (image != null && images == "true") {
-        action_url += " ![Image](" + encodeURIComponent(image) + ")";
-      }
-    }
-
-    action_url += "&v=1&";
-
-    if( !window.open(action_url+'noui=1&jump=doclose','diasporav1','location=yes,links=no,scrollbars=no,toolbar=no,width=590,height=250'))
-	location.href = action_url+'jump=yes';
+  if (podUrl == ""){
+    alert(chrome.i18n.getMessage("setPodUrl"));
+    chrome.tabs.create({url : "options.html"});
+    return;
   }
 
-  chrome.extension.onConnect.addListener(function(port) {
-    var tab = port.sender.tab;
+  if (podUrl.indexOf("http") == -1)
+    podUrl = "http://".concat(podUrl);
+
+  var action_url = podUrl + "/bookmarklet?";
+  if (subject.length > 0)
+    action_url += "title=" + encodeURIComponent(addslashes(subject));
+
+  if (url.length > 0) {
+    action_url += "&url=" + encodeURIComponent(url);
+
+    // Append the current selection to the end of the text message.
+    if (selection.length > 0) {
+      action_url += "&notes=" + encodeURIComponent(addslashes(selection));
+    }
+    if (image != null && images == "true") {
+      action_url += " ![Image](" + encodeURIComponent(image) + ")";
+    }
+  }
+
+  action_url += "&v=1&";
+
+  if( !window.open(action_url+'noui=1&jump=doclose','diasporav1','location=yes,links=no,scrollbars=no,toolbar=no,width=590,height=250'))
+    location.href = action_url+'jump=yes';
+}
+
+chrome.extension.onConnect.addListener(function(port) {
+  var tab = port.sender.tab;
     
-    // This will get called by the content script we execute in
-    // the tab as a result of the user pressing the browser action.
-    port.onMessage.addListener(function(info) {
-      var max_length = 1024;
-      var max_url_length = 25;
-      if (info.selection.length > max_length)
-        info.selection = info.selection.substring(0, max_length);
-      if (tab.url.length > max_url_length)
-      	googlurl(tab.url, function(shorturl) { postMessage(tab.id, info.title, shorturl, info.selection, info.image); });
-      else
-        postMessage(tab.id, info.title, tab.url, info.selection, info.image);
-    });
+  // This will get called by the content script we execute in
+  // the tab as a result of the user pressing the browser action.
+  port.onMessage.addListener(function(info) {
+    var max_length = 1024;
+    var max_url_length = 25;
+    if (info.selection.length > max_length)
+      info.selection = info.selection.substring(0, max_length);
+    if (tab.url.length > max_url_length)
+      googlurl(tab.url, function(shorturl) { postMessage(tab.id, info.title, shorturl, info.selection, info.image); });
+    else
+      postMessage(tab.id, info.title, tab.url, info.selection, info.image);
   });
+});
 
-  // Called when the user clicks on the browser action icon.
-  chrome.browserAction.onClicked.addListener(function(tab) {
-    // We can only inject scripts to find the title on pages loaded with http
-    // and https so for all other pages, we don't ask for the title.
-    if (tab.url.indexOf("http:") != 0 &&
-        tab.url.indexOf("https:") != 0) {
-      postMessage(tab.id, "", tab.url, "");
-    } else {
-      chrome.tabs.executeScript(null, {file: "content_script.js"});
-    }
-  });
+// Called when the user clicks on the browser action icon.
+chrome.browserAction.onClicked.addListener(function(tab) {
+  // We can only inject scripts to find the title on pages loaded with http
+  // and https so for all other pages, we don't ask for the title.
+  if (tab.url.indexOf("http:") != 0 && tab.url.indexOf("https:") != 0) {
+    postMessage(tab.id, "", tab.url, "");
+  } else {
+    chrome.tabs.executeScript(null, {file: "content_script.js"});
+  }
+});
+
 </script>
 </head>
 </html>
