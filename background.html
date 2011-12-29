@@ -76,17 +76,17 @@ function postMessage(tab_id, subject, url, selection, image) {
 
   var action_url = podUrl + "/bookmarklet?";
   if (subject.length > 0)
-    action_url += "title=" + encodeURIComponent(addslashes(subject));
+    action_url += "title=**" + encodeURIComponent(addslashes(subject)) + "**\\n";
 
   if (url.length > 0) {
-    action_url += "&url=" + encodeURIComponent(url);
+    action_url += "&url=**" + encodeURIComponent(url) + "**";
 
     // Append the current selection & image to the end of the text message.
     if (selection.length > 0) {
       action_url += "&notes=" + encodeURIComponent(addslashes(selection));
     }
     if (image != null && images == "true") {
-      action_url += "\\n[![Image](" + encodeURIComponent(image) + ")](" + encodeURIComponent(url) + ")";
+      action_url += "\\n\\n[![Image](" + encodeURIComponent(image) + ")](" + encodeURIComponent(url) + ")";
     }
   }
 
