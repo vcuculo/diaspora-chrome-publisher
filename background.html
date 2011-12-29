@@ -86,7 +86,7 @@ function postMessage(tab_id, subject, url, selection, image) {
       action_url += "&notes=" + encodeURIComponent(addslashes(selection));
     }
     if (image != null && images == "true") {
-      action_url += "\n[![Image](" + encodeURIComponent(image) + ")](" + encodeURIComponent(url) + ")";
+      action_url += " \n [![Image](" + encodeURIComponent(image) + ")](" + encodeURIComponent(url) + ")";
     }
   }
 
