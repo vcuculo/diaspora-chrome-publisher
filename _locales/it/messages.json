@@ -30,5 +30,13 @@
   "addImage": {
     "message": "Aggiungi una immagine, quando disponibile.",
     "description": "Add images in markdown format when <link rel=\"image_src\"> present in the page."
+  },
+  "addTags": {
+    "message": "Inserisci i tag\noppure premi Annulla.",
+    "description": "Prompt: Add tags or click Cancel."
+  },
+  "addTagsText": {
+    "message": "Inserisci #tag qui.",
+    "description": "Prompt: Add #tags here."
   }
 }

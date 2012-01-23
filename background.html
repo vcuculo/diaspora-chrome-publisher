@@ -64,7 +64,6 @@ function addslashes( str ) {
 function postMessage(tab_id, subject, url, selection, image) {
 
   getOptions();
-
   if (podUrl == ""){
     alert(chrome.i18n.getMessage("setPodUrl"));
     chrome.tabs.create({url : "options.html"});
@@ -87,6 +86,12 @@ function postMessage(tab_id, subject, url, selection, image) {
     }
     if (image != null && images == "true") {
       action_url += "\\n\\n[![Image](" + encodeURIComponent(image) + ")](" + encodeURIComponent(url) + ")";
+    }
+
+    var tags = prompt(chrome.i18n.getMessage("addTags"), chrome.i18n.getMessage("addTagsText"));
+
+    if (tags != null) {
+      action_url += "\\n\\n" + encodeURIComponent(tags);
     }
   }
 
