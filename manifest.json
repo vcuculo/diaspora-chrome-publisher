@@ -1,7 +1,7 @@
 {
     "name": "Diaspora* Publisher",
     "description": "__MSG_extDescription__",
-    "version": "1.6.2",
+    "version": "1.6.3",
     "default_locale": "en",
     "background_page": "background.html",
     "icons": { "48": "icon.png" },
@@ -15,7 +15,7 @@
     },
     "content_scripts": [
       {
-        "matches": ["http://*/*"],
+        "matches": ["*://*/*"],
         "css": ["css/smoothness/jquery-ui-1.8.16.custom.css", "css/thumbs.css"],
         "js": ["js/jquery.min.js", "js/jquery-ui-1.8.16.custom.min.js"]
       }

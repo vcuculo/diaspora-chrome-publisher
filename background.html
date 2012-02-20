@@ -37,7 +37,7 @@ function googlurl(url, cb) {
 
 function getPod(){
   if (window.localStorage != null && window.localStorage.podUrl != null)
-    return window.localStorage.podUrl;
+    podUrl = window.localStorage.podUrl;
 }
 
 function getImg(){
@@ -128,8 +128,9 @@ chrome.extension.onConnect.addListener(function(port) {
 
 // Called when the user clicks on the browser action icon.
 chrome.browserAction.onClicked.addListener(function(tab) {
+  
+  getPod();
 
-  podUrl = getPod();
   if (podUrl == ""){
     alert(chrome.i18n.getMessage("setPodUrl"));
     chrome.tabs.create({url : "options.html"});
