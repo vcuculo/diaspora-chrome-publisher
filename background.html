@@ -11,26 +11,27 @@
 -->
 <html>
 <head>
-<script src="js/jsonlib-src.js"></script>
 <script>
 
 var podUrl = "";
 var images = false;
 
 function googlurl(url, cb) {
-  jsonlib.fetch({
-    url: 'https://www.googleapis.com/urlshortener/v1/url',
-    header: 'Content-Type: application/json',
-    data: JSON.stringify({longUrl: url})
-  }, function (m) {
-    var result = null;
-    try {
-      result = JSON.parse(m.content).id;
-      if (typeof result != 'string') result = null;
-    } catch (e) {
-      result = null;
+  $.ajax({
+    type: 'POST',
+    url: "https://www.googleapis.com/urlshortener/v1/url",
+    contentType: 'application/json',
+    data: JSON.stringify({longUrl: url}),
+    success: function (m) {
+      var result = null;
+      try {
+        result = m.id;
+        if (typeof result != 'string') result = null;
+      } catch (e) {
+        result = null;
+      }
+      cb(result);
     }
-    cb(result);
   });
 }
 
@@ -54,14 +55,13 @@ function addslashes( str ) {
   // +   improved by: Onno Marsman  
   // *     example 1: addslashes("kevin's birthday");  
   // *     returns 1: 'kevin\'s birthday'  
-   
+
   return (str+'').replace(/([\\"'])/g, "\\$1").replace(/\0/g, "\\0");  
 }
   
 function postMessage(tab_id, subject, url, selection, image) {
 
   getOptions();
-
   if (podUrl == ""){
     alert(chrome.i18n.getMessage("setPodUrl"));
     chrome.tabs.create({url : "options.html"});
@@ -73,17 +73,24 @@ function postMessage(tab_id, subject, url, selection, image) {
 
   var action_url = podUrl + "/bookmarklet?";
   if (subject.length > 0)
-    action_url += "title=" + encodeURIComponent(addslashes(subject));
+    action_url += "title=**" + encodeURIComponent(addslashes(subject)) + "**\\n";
 
   if (url.length > 0) {
     action_url += "&url=" + encodeURIComponent(url);
 
-    // Append the current selection to the end of the text message.
+    // Append the current selection & image to the end of the text message.
     if (selection.length > 0) {
       action_url += "&notes=" + encodeURIComponent(addslashes(selection));
     }
     if (image != null && images == "true") {
-      action_url += " ![Image](" + encodeURIComponent(image) + ")";
+      action_url += "\\n\\n[![Image](" + encodeURIComponent(image) + ")](" + encodeURIComponent(url) + ")";
+    }
+  }
+
+    var tags = prompt(chrome.i18n.getMessage("addTags"), chrome.i18n.getMessage("addTagsText"));
+
+    if (tags != null) {
+      action_url += "\\n\\n" + encodeURIComponent(tags);
     }
   }
 
@@ -94,6 +101,8 @@ function postMessage(tab_id, subject, url, selection, image) {
 }
 
 chrome.extension.onConnect.addListener(function(port) {
+  var tab = port.sender.tab;
+    
   // This will get called by the content script we execute in
   // the tab as a result of the user pressing the browser action.
   port.onMessage.addListener(function(info) {
@@ -118,6 +127,7 @@ chrome.browserAction.onClicked.addListener(function(tab) {
     chrome.tabs.executeScript(null, {file: "content_script.js"});
   }
 });
+
 </script>
 </head>
 </html>
