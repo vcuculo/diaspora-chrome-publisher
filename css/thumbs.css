@@ -33,7 +33,7 @@ ul#thumbs, li#thumbs{
 
 ul#thumbs a{
   display:block;
-  float:left;
+  float:center;
   width:100px;
   height:100px;
   line-height:100px;
@@ -42,10 +42,12 @@ ul#thumbs a{
   z-index:1;		
 }
 ul#thumbs a img{
-  float:left;
+  float: left;
   position:absolute;
   top:-20px;
-  left:-50px;	
+  left:-50px;
+  max-height: 240px;
+  max-width: 320px;
 }
 ul#thumbs a:hover{
   overflow:visible;

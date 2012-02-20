@@ -11,10 +11,10 @@
 -->
 <html>
 <head>
+<script src="js/jquery.min.js"></script>
 <script>
 
 var podUrl = "";
-var images = false;
 
 function googlurl(url, cb) {
   $.ajax({
@@ -35,12 +35,24 @@ function googlurl(url, cb) {
   });
 }
 
-function getOptions() {
-  if (window.localStorage != null && window.localStorage.podUrl != null && window.localStorage.images != null){
-    podUrl = window.localStorage.podUrl;
-    images = window.localStorage.images; 
-    return;
-  }
+function getPod(){
+  if (window.localStorage != null && window.localStorage.podUrl != null)
+    return window.localStorage.podUrl;
+}
+
+function getImg(){
+  if (window.localStorage != null && window.localStorage.images != null) 
+    return window.localStorage.images;
+}
+
+function getTag(){
+  if (window.localStorage != null && window.localStorage.tags != null)
+    return window.localStorage.tags;
+}
+
+function getMarkdown(){
+  if (window.localStorage != null && window.localStorage.markdown != null)
+    return window.localStorage.markdown;
 }
 
 function addslashes( str ) {  
@@ -60,37 +72,28 @@ function addslashes( str ) {
 }
   
 function postMessage(tab_id, subject, url, selection, image) {
-
-  getOptions();
-  if (podUrl == ""){
-    alert(chrome.i18n.getMessage("setPodUrl"));
-    chrome.tabs.create({url : "options.html"});
-    return;
-  }
-
-  if (podUrl.indexOf("http") == -1)
-    podUrl = "http://".concat(podUrl);
-
   var action_url = podUrl + "/bookmarklet?";
+
   if (subject.length > 0)
-    action_url += "title=**" + encodeURIComponent(addslashes(subject)) + "**\\n";
+    if(getMarkdown() == "true")
+      action_url += "title=**" + encodeURIComponent(addslashes(subject)) + "**";
+    else
+      action_url += "title=" + encodeURIComponent(addslashes(subject));
 
   if (url.length > 0) {
     action_url += "&url=" + encodeURIComponent(url);
-
     // Append the current selection & image to the end of the text message.
     if (selection.length > 0) {
       action_url += "&notes=" + encodeURIComponent(addslashes(selection));
     }
-    if (image != null && images == "true") {
-      action_url += "\\n\\n[![Image](" + encodeURIComponent(image) + ")](" + encodeURIComponent(url) + ")";
+    if (image != null && getImg() == "true") {
+      action_url += "<br>[![Image](" + image + ")](" + encodeURIComponent(url) + ")";
     }
   }
-
+  if (getTag() == "true"){
     var tags = prompt(chrome.i18n.getMessage("addTags"), chrome.i18n.getMessage("addTagsText"));
-
     if (tags != null) {
-      action_url += "\\n\\n" + encodeURIComponent(tags);
+      action_url += "<br>" + encodeURIComponent(tags);
     }
   }
 
@@ -106,26 +109,42 @@ chrome.extension.onConnect.addListener(function(port) {
   // This will get called by the content script we execute in
   // the tab as a result of the user pressing the browser action.
   port.onMessage.addListener(function(info) {
-    var max_length = 1024;
-    var max_url_length = 25;
-    if (info.selection.length > max_length)
-      info.selection = info.selection.substring(0, max_length);
-    if (tab.url.length > max_url_length)
-      googlurl(tab.url, function(shorturl) { postMessage(tab.id, info.title, shorturl, info.selection, info.image); });
-    else
-      postMessage(tab.id, info.title, tab.url, info.selection, info.image);
+    if (info.type == "send"){
+
+      var max_length = 1024;
+      var max_url_length = 25;
+      if (info.selection.length > max_length)
+        info.selection = info.selection.substring(0, max_length);
+      if (tab.url.length > max_url_length)
+        googlurl(tab.url, function(shorturl) { postMessage(tab.id, info.title, shorturl, info.selection, info.image); });
+      else
+        postMessage(tab.id, info.title, tab.url, info.selection, info.image);
+    } 
+    else if (info.type == "getImg")
+
+      port.postMessage({img: getImg()});
   });
 });
 
 // Called when the user clicks on the browser action icon.
 chrome.browserAction.onClicked.addListener(function(tab) {
+
+  podUrl = getPod();
+  if (podUrl == ""){
+    alert(chrome.i18n.getMessage("setPodUrl"));
+    chrome.tabs.create({url : "options.html"});
+    return;
+  }
+
+  if (podUrl.indexOf("http") == -1)
+    podUrl = "http://".concat(podUrl);
+
   // We can only inject scripts to find the title on pages loaded with http
   // and https so for all other pages, we don't ask for the title.
-  if (tab.url.indexOf("http:") != 0 && tab.url.indexOf("https:") != 0) {
+  if (tab.url.indexOf("http:") != 0 && tab.url.indexOf("https:") != 0)
     postMessage(tab.id, "", tab.url, "");
-  } else {
+  else
     chrome.tabs.executeScript(null, {file: "content_script.js"});
-  }
 });
 
 </script>

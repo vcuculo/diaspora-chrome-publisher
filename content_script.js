@@ -7,26 +7,46 @@
 var links = document.getElementsByTagName("link");
 var images = document.getElementsByTagName("img");
 var image = null;
+var port = chrome.extension.connect();
 
-for (var i=0; i<links.length; i++) {
-  if (links[i].getAttribute("rel") == "image_src"){
-    image = links[i].getAttribute("href");
-     break;
-   }
+port.postMessage({type : "getImg"});
+
+port.onMessage.addListener(function(msg) {
+  if(msg.img == "false")
+    sendPlain();
+  else{
+    for (var i=0; i<links.length; i++) {
+      if (links[i].getAttribute("rel") == "image_src"){
+        image = links[i].getAttribute("href");
+        break;
+      }
+    }
+    if (image == null && images.length == 1)
+      sendPlain(image);
+    else if (images.length > 0)
+      chooseImage(images);
+  }
+});
+
+function sendPlain(img){
+  var additionalInfo = {
+    type: "send",
+    title: document.title,
+    selection: window.getSelection().toString().replace(/[\r\n]/g, ""),
+    image: img
+  };
+  port.postMessage(additionalInfo);
 }
-
-if(image == null && images.length == 1)
-   image = images[0].getAttribute("src");
-else if(images.length > 0)
-  chooseImage(images);
 
 function chooseImage(images){
 
   var c = 0;
   var elems = '';
-  var cols = 4;
+  var cols = 7;
 
-  var html = '<div class="ui-overlay"><div class="ui-widget-overlay"></div>';
+  $('#dp-imageselect').remove();
+
+  var html = '<div id="dp-imageselect"><div id="ui-overlay" class="ui-overlay"><div class="ui-widget-overlay"></div>';
 
   for (var i=0; i<images.length; i++){
 
@@ -56,23 +76,24 @@ function chooseImage(images){
 
     html += elems;
 
-    html += '</table></ul></div>';
+    html += '</table></ul></div></div>';
     //html += '</ul></div>'; 
     $("body").append(html);
+    $("body").animate({scrollTop:0}, 'slow');
   }
-}
+ 
+  var thumbs = $('#dthumbs td');
 
-var thumbs = $('#dthumbs td');
-var port = chrome.extension.connect();
+  document.getElementById("ui-overlay").addEventListener('click', function() {
+    $('#dp-imageselect').remove();
+    sendPlain();
+  }, false);
 
-for (var i=0;i<thumbs.length;i++){
-  thumbs[i].addEventListener('click', function() {
-    var imgSrc = this.getElementsByTagName("img")[0].getAttribute("src");
-    var additionalInfo = {
-      "title": document.title,
-      "selection": window.getSelection().toString().replace(/[\r\n]/g, ""),
-      "image": encodeURIComponent(imgSrc)
-    };
-    port.postMessage(additionalInfo);
-  });
+  for (var i=0;i<thumbs.length;i++){
+    thumbs[i].addEventListener('click', function() {
+      var imgSrc = this.getElementsByTagName("img")[0].getAttribute("src");
+      sendPlain(encodeURIComponent(imgSrc));
+      $('#dp-imageselect').remove();
+    }, false);
+  }
 }

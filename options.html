@@ -45,7 +45,9 @@ function localize() {
   document.title = chrome.i18n.getMessage("optionsTitle");
   $("#choosePod").html(chrome.i18n.getMessage("choosePod"));
   $("#chooseAbove").html(chrome.i18n.getMessage("chooseAbove"));
-  $("label[id='addImage']").append(chrome.i18n.getMessage("addImage"));
+  $("label[id='addImageOpt']").append(chrome.i18n.getMessage("addImageOpt"));
+  $("label[id='addMarkdownOpt']").append(chrome.i18n.getMessage("addMarkdownOpt"));
+  $("label[id='addTagsOpt']").append(chrome.i18n.getMessage("addTagsOpt"));
 }
 
 function submit() {
@@ -55,7 +57,10 @@ function submit() {
   }
   else
   	window.localStorage.podUrl = document.getElementById('pod').placeholder;
+
   window.localStorage.images = document.getElementById('images').checked;
+  window.localStorage.tags = document.getElementById('tags').checked;
+  window.localStorage.markdown = document.getElementById('markdown').checked;
 
   var notification = webkitNotifications.createNotification(
   'icon.png',  // icon url
@@ -74,6 +79,8 @@ function submit() {
 
 function saveOption(){
   window.localStorage.images = document.getElementById('images').checked;
+  window.localStorage.tags = document.getElementById('tags').checked;
+  window.localStorage.markdown = document.getElementById('markdown').checked;
 }
 
 function combo(thelist, theinput) {
@@ -129,6 +136,8 @@ function main() {
 
   if (window.localStorage.images != null)
     document.getElementById('images').checked = window.localStorage.images;
+    document.getElementById('markdown').checked = window.localStorage.markdown;
+    document.getElementById('tags').checked = window.localStorage.tags;
 }
 
 </script>
@@ -137,14 +146,17 @@ function main() {
 <center>
 <b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
     <div class="contentb">
+    <br>
     <form action="javascript:submit();">
     	<strong><div id="choosePod"></div></strong>
     	<br><br>
     	<input id="pod" name="podurl" size="30" style="font-size: 30px;" class="ui-autocomplete-input"><input type="submit" style="font-size: 30px;">
     	<br><br>
     </form>
-    <br>
-    <label id="addImage" for="images" style="font-family: Helvetica, Arial, sans-serif;"><input id="images" type="checkbox" onClick="javascript:saveOption()"></label>
+    <label id="addImageOpt" for="images" style="font-family: Helvetica, Arial, sans-serif;"><input id="images" type="checkbox" onClick="javascript:saveOption()"></label>
+    <label id="addMarkdownOpt" for="markdown" style="font-family: Helvetica, Arial, sans-serif;"><input id="markdown" type="checkbox" onClick="javascript:saveOption()"></label>
+    <label id="addTagsOpt" for="tags" style="font-family: Helvetica, Arial, sans-serif;"><input id="tags" type="checkbox" onClick="javascript:saveOption()"></label>
+    <br><br>
     </div>
 <b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b>
 </center>

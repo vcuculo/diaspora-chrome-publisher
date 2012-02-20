@@ -27,9 +27,17 @@
     "message": "Set your Diaspora* pod before use.",
     "description": "Alert: Set your Diaspora* Pod Url before use."
   },
-  "addImage": {
-    "message": "Add image, when available.",
-    "description": "Add images in markdown format when <link rel=\"image_src\"> present in the page."
+  "addImageOpt": {
+    "message": "Images",
+    "description": "Label: Shows image selector prompt when publishing a content."
+  },
+  "addMarkdownOpt": {
+    "message": "Markdown",
+    "description": "Label: Use Markdown to publish contents."
+  },
+  "addTagsOpt": {
+    "message": "#Tags",
+    "description": "Label: Ask always to insert a tag when publishing a content."
   },
   "addTags": {
     "message": "Add tags to your post\nor click Cancel.",
