@@ -32,7 +32,7 @@
     "description": "Add images in markdown format when <link rel=\"image_src\"> present in the page."
   },
   "addTags": {
-    "message": "Insert tags\nor click Cancel.",
+    "message": "Add tags to your post\nor click Cancel.",
     "description": "Prompt: Add tags or click Cancel."
   },
   "addTagsText": {
