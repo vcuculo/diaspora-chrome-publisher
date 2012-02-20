@@ -69,9 +69,9 @@ function chooseImage(images){
     width = cols * 114;
     height = Math.ceil(c / cols) * 114;
     html += '<div class="ui-widget-shadow ui-corner-all" style="width: '+ (width + 20) +'px;';
-    html += ' height: '+ (height + 20) +'px; position: absolute; left: 50px; top: 30px;"></div></div>';
+    html += ' height: '+ (height + 20) +'px; position: absolute; left: 50px; top: 30px; z-index:9999"></div></div>';
     html += '<div style="position: absolute; width: '+ width +'px; height: '+ height +'px;left: 50px;';
-    html += ' top: 30px; padding: 10px; overflow: block" class="ui-widget ui-widget-content ui-corner-all">';
+    html += ' top: 30px; padding: 10px; overflow: block; z-index:9999" class="ui-widget ui-widget-content ui-corner-all">';
     html += '<ul id="thumbs"><table id="dthumbs"><tr>';
 
     html += elems;
