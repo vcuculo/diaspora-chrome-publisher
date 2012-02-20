@@ -1,0 +1,50 @@
+{
+  "extDescription": {
+    "message": "Partagez vos pages favorites avec vos amis Diaspora*. Personnalisable avec votre propre pod Diaspora*.",
+    "description": "Text: Description de l'extension."
+  },
+  "extAction": {
+    "message": "Publier cette page sur Diaspora",
+    "description": "Hover: Action de l'extension au survol de l'icône."
+  },
+  "localStorage": {
+    "message": "LocalStorage est requis pour changer l'adresse du pod.",
+    "description": "Alert: Localstorage n'est pas supporté"
+  },
+  "urlSaved": {
+    "message": "Adresse du pod sauvée !",
+    "description": "Alert: Notification dans la page des options"
+  },
+  "choosePod": {
+    "message": "Insérez votre pod Diaspora* :",
+    "description": "Text: Choisissez l'adresse de votre pod Diaspora*, ou insérez-en une nouvelle :"
+  },
+  "optionsTitle": {
+    "message": "Options pour l'extension Diaspora* Publisher",
+    "description": "Title: Options l'extension Diaspora* Publisher"
+  },
+  "setPodUrl": {
+    "message": "Choisissez votre pod Diaspora* avant de commencer à utiliser l'extension.",
+    "description": "Alert: Choisissez votre pod Diaspora* avant de commencer à utiliser l'extension."
+  },
+  "addImageOpt": {
+    "message": "Images",
+    "description": "Label: Montre le sélecteur d'image lors de la publication d'un contenu."
+  },
+  "addMarkdownOpt": {
+    "message": "Markdown",
+    "description": "Label: Utiliser le Markdown pour publier du contenu."
+  },
+  "addTagsOpt": {
+    "message": "#Tags",
+    "description": "Label: Toujours demander d'insérer un tag lors de la publication d'un contenu."
+  },
+  "addTags": {
+    "message": "Ajouter des tags à votre message ou cliquez sur Annuler.",
+    "description": "Prompt: Ajouter des tags ou cliquez sur Annuler."
+  },
+  "addTagsText": {
+    "message": "Insérez votre #tag ici.",
+    "description": "Prompt: Ajoutez des #tags ici."
+  }
+}
