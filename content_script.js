@@ -81,7 +81,10 @@ function chooseImage(images){
     $("body").append(html);
     $("body").animate({scrollTop:0}, 'slow');
   }
- 
+  else{
+    sendPlain();
+    return;
+  }
   var thumbs = $('#dthumbs td');
 
   document.getElementById("ui-overlay").addEventListener('click', function() {
