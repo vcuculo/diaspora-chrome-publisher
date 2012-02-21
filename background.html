@@ -55,6 +55,16 @@ function getMarkdown(){
     return window.localStorage.markdown;
 }
 
+function getTitle(){
+  if (window.localStorage != null && window.localStorage.title != null)
+    return window.localStorage.title;
+}
+
+function getUrl(){
+  if (window.localStorage != null && window.localStorage.url != null)
+    return window.localStorage.url;
+}
+
 function addslashes( str ) {  
   // Escapes single quote, double quotes and backslash characters in a string with backslashes    
   //   
@@ -72,34 +82,33 @@ function addslashes( str ) {
 }
   
 function postMessage(tab_id, subject, url, selection, image) {
-  var action_url = podUrl + "/bookmarklet?";
+  var action_url = podUrl + "/bookmarklet?title=";
 
-  if (subject.length > 0)
+  if (subject.length > 0 && getTitle() == "true")
     if(getMarkdown() == "true")
-      action_url += "title=**" + encodeURIComponent(addslashes(subject)) + "**";
+      action_url += "**" + encodeURIComponent(addslashes(subject)) + "**";
     else
-      action_url += "title=" + encodeURIComponent(addslashes(subject));
+      action_url += encodeURIComponent(addslashes(subject));
 
-  if (url.length > 0) {
-    action_url += "&url=" + encodeURIComponent(url);
-    // Append the current selection & image to the end of the text message.
-    if (selection.length > 0) {
-      action_url += "&notes=" + encodeURIComponent(addslashes(selection));
-    }
-    if (image != null && getImg() == "true") {
-      action_url += "<br>[![Image](" + image + ")](" + encodeURIComponent(url) + ")";
-    }
-  }
+  if (url.length > 0 && getUrl() == "true")
+    action_url += " • " + encodeURIComponent(url);
+
+  // Append the current selection & image to the end of the text message.
+  if (selection.length > 0)
+    action_url += " • " + encodeURIComponent(selection);
+
+  if (image != null && getImg() == "true")
+    action_url += "<br>[![Image](" + image + ")](" + encodeURIComponent(url) + ")";
+
   if (getTag() == "true"){
     var tags = prompt(chrome.i18n.getMessage("addTags"), chrome.i18n.getMessage("addTagsText"));
     if (tags != null) {
       action_url += "<br>" + encodeURIComponent(tags);
     }
   }
+  action_url += "<br><sub>&url=[via Diaspora Publisher](" + encodeURIComponent("http://goo.gl/tmeFB") + ") -</sub>&v=1&";
 
-  action_url += "&v=1&";
-
-  if( !window.open(action_url+'noui=1&jump=doclose','diasporav1','location=yes,links=no,scrollbars=no,toolbar=no,width=590,height=250'))
+  if (!window.open(action_url+'noui=1&jump=doclose','diasporav1','location=yes,links=no,scrollbars=no,toolbar=no,width=590,height=250'))
     location.href = action_url+'jump=yes';
 }
 

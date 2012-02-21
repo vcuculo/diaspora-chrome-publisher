@@ -48,6 +48,8 @@ function localize() {
   $("label[id='addImageOpt']").append(chrome.i18n.getMessage("addImageOpt"));
   $("label[id='addMarkdownOpt']").append(chrome.i18n.getMessage("addMarkdownOpt"));
   $("label[id='addTagsOpt']").append(chrome.i18n.getMessage("addTagsOpt"));
+  $("label[id='addUrlOpt']").append(chrome.i18n.getMessage("addTitleOpt"));
+  $("label[id='addTitleOpt']").append(chrome.i18n.getMessage("addUrlOpt"));
 }
 
 function submit() {
@@ -61,6 +63,8 @@ function submit() {
   window.localStorage.images = document.getElementById('images').checked;
   window.localStorage.tags = document.getElementById('tags').checked;
   window.localStorage.markdown = document.getElementById('markdown').checked;
+  window.localStorage.title = document.getElementById('title').checked;
+  window.localStorage.url = document.getElementById('url').checked;
 
   var notification = webkitNotifications.createNotification(
   'icon.png',  // icon url
@@ -81,6 +85,8 @@ function saveOption(){
   window.localStorage.images = document.getElementById('images').checked;
   window.localStorage.tags = document.getElementById('tags').checked;
   window.localStorage.markdown = document.getElementById('markdown').checked;
+  window.localStorage.title = document.getElementById('title').checked;
+  window.localStorage.url = document.getElementById('url').checked;
 }
 
 function combo(thelist, theinput) {
@@ -138,6 +144,8 @@ function main() {
     document.getElementById('images').checked = window.localStorage.images;
     document.getElementById('markdown').checked = window.localStorage.markdown;
     document.getElementById('tags').checked = window.localStorage.tags;
+    document.getElementById('title').checked = window.localStorage.title;
+    document.getElementById('url').checked = window.localStorage.url;
 }
 
 </script>
@@ -157,6 +165,8 @@ function main() {
     <label id="addMarkdownOpt" for="markdown" style="font-family: Helvetica, Arial, sans-serif;"><input id="markdown" type="checkbox" onClick="javascript:saveOption()"></label>
     <label id="addTagsOpt" for="tags" style="font-family: Helvetica, Arial, sans-serif;"><input id="tags" type="checkbox" onClick="javascript:saveOption()"></label>
     <br><br>
+    <label id="addTitleOpt" for="title" style="font-family: Helvetica, Arial, sans-serif;"><input id="title" type="checkbox" onClick="javascript:saveOption()"></label>
+    <label id="addUrlOpt" for="url" style="font-family: Helvetica, Arial, sans-serif;"><input id="url" type="checkbox" onClick="javascript:saveOption()"></label>
     </div>
 <b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b>
 </center>

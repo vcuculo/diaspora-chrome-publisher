@@ -39,6 +39,14 @@
     "message": "#Tags",
     "description": "Label: Ask always to insert a tag when publishing a content."
   },
+  "addTitleOpt": {
+    "message": "Insert page title",
+    "description": "Label: Insert page title when publishing a content."
+  },
+  "addUrlOpt": {
+    "message": "Insert page URL",
+    "description": "Label: Insert page URL when publishing a content."
+  },
   "addTags": {
     "message": "Add tags to your post\nor click Cancel.",
     "description": "Prompt: Add tags or click Cancel."

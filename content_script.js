@@ -22,7 +22,7 @@ port.onMessage.addListener(function(msg) {
       }
     }
     if (image == null && images.length == 1)
-      sendPlain(image);
+      sendPlain(images[0].getAttribute("src"));
     else if (images.length > 0)
       chooseImage(images);
   }
@@ -62,11 +62,11 @@ function chooseImage(images){
      elems += '<td class="dthumb"><li><a href="#"><img src="'+ imgSrc +'"></a></li></td>';
      c++;
      //elems += '<li><a href="#"><img src="'+ images[i].getAttribute("src") +'"></a></li>';
-    }
-    
+    }    
   }
+
   if (c > 0){
-    width = cols * 114;
+    width = ((c < cols) ? c : cols ) * 114;
     height = Math.ceil(c / cols) * 114;
     html += '<div class="ui-widget-shadow ui-corner-all" style="width: '+ (width + 20) +'px;';
     html += ' height: '+ (height + 20) +'px; position: absolute; left: 50px; top: 30px; z-index:9999"></div></div>';
