@@ -65,6 +65,12 @@ function getUrl(){
     return window.localStorage.url;
 }
 
+function getYTimg(){
+  if (window.localStorage != null && window.localStorage.ytimg != null)
+    return window.localStorage.ytimg;
+}
+
+
 function addslashes( str ) {  
   // Escapes single quote, double quotes and backslash characters in a string with backslashes    
   //   
@@ -106,7 +112,7 @@ function postMessage(tab_id, subject, url, selection, image) {
       action_url += "<br>" + encodeURIComponent(tags);
     }
   }
-  action_url += "<br><sub>&url=[via Diaspora Publisher](" + encodeURIComponent("http://goo.gl/tmeFB") + ") -</sub>&v=1&";
+  action_url += "<br><sub>&url=[via Diaspora* Publisher](" + encodeURIComponent("http://goo.gl/tmeFB") + ") -</sub>&v=1&";
 
   if (!window.open(action_url+'noui=1&jump=doclose','diasporav1','location=yes,links=no,scrollbars=no,toolbar=no,width=590,height=250'))
     location.href = action_url+'jump=yes';
@@ -118,19 +124,22 @@ chrome.extension.onConnect.addListener(function(port) {
   // This will get called by the content script we execute in
   // the tab as a result of the user pressing the browser action.
   port.onMessage.addListener(function(info) {
-    if (info.type == "send"){
-
+    if (info.type == "sendText"){
       var max_length = 1024;
       var max_url_length = 25;
       if (info.selection.length > max_length)
         info.selection = info.selection.substring(0, max_length);
-      if (tab.url.length > max_url_length)
+   
+      if (tab.url.length > max_url_length && info.video == false)
         googlurl(tab.url, function(shorturl) { postMessage(tab.id, info.title, shorturl, info.selection, info.image); });
+
+      else if (info.video == true && getYTimg() == "false")
+        postMessage(tab.id, info.title, tab.url, info.selection, null);
+
       else
         postMessage(tab.id, info.title, tab.url, info.selection, info.image);
-    } 
+    }
     else if (info.type == "getImg")
-
       port.postMessage({img: getImg()});
   });
 });

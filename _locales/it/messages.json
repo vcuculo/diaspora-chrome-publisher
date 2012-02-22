@@ -47,6 +47,10 @@
     "message": "Inserisci URL",
     "description": "Label: Insert page URL when publishing a content."
   },
+  "addYTOpt": {
+    "message": "Anteprima YouTube",
+    "description": "Label: Insert youtube preview image when sharing a video."
+  },
   "addTags": {
     "message": "Aggiungi tag al post\noppure premi Annulla.",
     "description": "Prompt: Add tags or click Cancel."

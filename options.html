@@ -48,8 +48,9 @@ function localize() {
   $("label[id='addImageOpt']").append(chrome.i18n.getMessage("addImageOpt"));
   $("label[id='addMarkdownOpt']").append(chrome.i18n.getMessage("addMarkdownOpt"));
   $("label[id='addTagsOpt']").append(chrome.i18n.getMessage("addTagsOpt"));
-  $("label[id='addUrlOpt']").append(chrome.i18n.getMessage("addTitleOpt"));
-  $("label[id='addTitleOpt']").append(chrome.i18n.getMessage("addUrlOpt"));
+  $("label[id='addUrlOpt']").append(chrome.i18n.getMessage("addUrlOpt"));
+  $("label[id='addTitleOpt']").append(chrome.i18n.getMessage("addTitleOpt"));
+  $("label[id='addYTOpt']").append(chrome.i18n.getMessage("addYTOpt"));
 }
 
 function submit() {
@@ -65,6 +66,7 @@ function submit() {
   window.localStorage.markdown = document.getElementById('markdown').checked;
   window.localStorage.title = document.getElementById('title').checked;
   window.localStorage.url = document.getElementById('url').checked;
+  window.localStorage.ytimg = document.getElementById('ytimg').checked;
 
   var notification = webkitNotifications.createNotification(
   'icon.png',  // icon url
@@ -87,6 +89,7 @@ function saveOption(){
   window.localStorage.markdown = document.getElementById('markdown').checked;
   window.localStorage.title = document.getElementById('title').checked;
   window.localStorage.url = document.getElementById('url').checked;
+  window.localStorage.ytimg = document.getElementById('ytimg').checked;
 }
 
 function combo(thelist, theinput) {
@@ -146,6 +149,7 @@ function main() {
     document.getElementById('tags').checked = window.localStorage.tags;
     document.getElementById('title').checked = window.localStorage.title;
     document.getElementById('url').checked = window.localStorage.url;
+    document.getElementById('ytimg').checked = window.localStorage.ytimg;
 }
 
 </script>
@@ -167,6 +171,8 @@ function main() {
     <br>
     <label id="addTitleOpt" for="title" style="font-family: Helvetica, Arial, sans-serif;"><input id="title" type="checkbox" onClick="javascript:saveOption()"></label>
     <label id="addUrlOpt" for="url" style="font-family: Helvetica, Arial, sans-serif;"><input id="url" type="checkbox" onClick="javascript:saveOption()"></label>
+    <br>
+    <label id="addYTOpt" for="ytimg" style="font-family: Helvetica, Arial, sans-serif;"><input id="ytimg" type="checkbox" onClick="javascript:saveOption()"></label>
     <br><br>
     </div>
 <b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b>

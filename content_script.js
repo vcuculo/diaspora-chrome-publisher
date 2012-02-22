@@ -12,28 +12,54 @@ var port = chrome.extension.connect();
 port.postMessage({type : "getImg"});
 
 port.onMessage.addListener(function(msg) {
-  if(msg.img == "false")
-    sendPlain();
-  else{
+
+  if (msg.img == "false")
+    sendMess(false);
+  
+  else if (msg.img == "true"){
     for (var i=0; i<links.length; i++) {
       if (links[i].getAttribute("rel") == "image_src"){
         image = links[i].getAttribute("href");
         break;
       }
     }
-    if (image == null && images.length == 1)
-      sendPlain(images[0].getAttribute("src"));
+
+    if (isYoutube() == true){
+      sendMess(true, getYTimg(window.location.href));
+    }
+    else if (images.length == 0 && image != null)
+      sendMess(false, image);
+    else if (images.length == 1)
+      sendMess(false, images[0].src);
     else if (images.length > 0)
       chooseImage(images);
   }
 });
 
-function sendPlain(img){
+function isYoutube(){
+  return (window.location.hostname == "www.youtube.com");
+}
+
+function getYTimg( url )
+{
+  if(url === null){ return ""; }
+
+  var vid;
+  var results;
+
+  results = url.match("[\\?&]v=([^&#]*)");
+  vid = ( results === null ) ? url : results[1];
+
+  return "http://img.youtube.com/vi/"+vid+"/0.jpg";
+}
+
+function sendMess(video, img){
   var additionalInfo = {
-    type: "send",
+    type: "sendText",
     title: document.title,
     selection: window.getSelection().toString().replace(/[\r\n]/g, ""),
-    image: img
+    image: img,
+    video: video
   };
   port.postMessage(additionalInfo);
 }
@@ -54,7 +80,7 @@ function chooseImage(images){
     max = Math.max(images[i].width, images[i].height);
     
     if (min/max > 0.3 && max >= 100 && min >= 100){
-     var imgSrc = images[i].getAttribute("src");
+     var imgSrc = images[i].src;
      if (c % cols == 0 && c > 0)
        //elems += '<br>';
        elems += '</tr><tr>';
@@ -82,20 +108,20 @@ function chooseImage(images){
     $("body").animate({scrollTop:0}, 'slow');
   }
   else{
-    sendPlain();
+    sendMess(false);
     return;
   }
   var thumbs = $('#dthumbs td');
 
   document.getElementById("ui-overlay").addEventListener('click', function() {
     $('#dp-imageselect').remove();
-    sendPlain();
+    sendMess(false);
   }, false);
 
   for (var i=0;i<thumbs.length;i++){
     thumbs[i].addEventListener('click', function() {
       var imgSrc = this.getElementsByTagName("img")[0].getAttribute("src");
-      sendPlain(encodeURIComponent(imgSrc));
+      sendMess(false, encodeURIComponent(imgSrc));
       $('#dp-imageselect').remove();
     }, false);
   }
