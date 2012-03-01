@@ -55,18 +55,13 @@ function localize() {
 
 function submit() {
   if (document.getElementById('pod').value != ""){
-	window.localStorage.podUrl = document.getElementById('pod').value;
- 	document.getElementById('pod').placeholder = document.getElementById('pod').value;
+    window.localStorage.podUrl = document.getElementById('pod').value;
+    document.getElementById('pod').placeholder = document.getElementById('pod').value;
   }
   else
-  	window.localStorage.podUrl = document.getElementById('pod').placeholder;
+    window.localStorage.podUrl = document.getElementById('pod').placeholder;
 
-  window.localStorage.images = document.getElementById('images').checked;
-  window.localStorage.tags = document.getElementById('tags').checked;
-  window.localStorage.markdown = document.getElementById('markdown').checked;
-  window.localStorage.title = document.getElementById('title').checked;
-  window.localStorage.url = document.getElementById('url').checked;
-  window.localStorage.ytimg = document.getElementById('ytimg').checked;
+  saveOption();
 
   var notification = webkitNotifications.createNotification(
   'icon.png',  // icon url
@@ -100,7 +95,6 @@ function combo(thelist, theinput) {
 }
 
 function updatePodsRemotely() {
-
   var i = 0;
   $.get(remoteList, function(data) {
         var remotefilePod = data.split(",");
@@ -116,16 +110,16 @@ function updatePodsRemotely() {
 }
 
 function updatePodsLocally(){
-    var i = 0;
-      $.get(localList, function(data) {
-          var filePod = data.split("\n");
-          $.each(filePod, function() {
-             start = this.indexOf("/") + 2;
-             podName = this.substring(start);
-             pods[i++] = podValue;
-  	  });
-          $("input#pod").autocomplete({source: pods}); 
-      });
+  var i = 0;
+  $.get(localList, function(data) {
+    var filePod = data.split("\n");
+    $.each(filePod, function() {
+      start = this.indexOf("/") + 2;
+      podName = this.substring(0);
+      pods[i++] = podName;
+    });
+    $("input#pod").autocomplete({source: pods}); 
+  });
 }
 
 function main() {
@@ -137,19 +131,16 @@ function main() {
   }
 
   updatePodsRemotely();
+  
+  document.getElementById('pod').placeholder = (window.localStorage.podUrl != null) ? window.localStorage.podUrl : defaultPlaceholder;
 
-  if (window.localStorage.podUrl != null)
-    document.getElementById('pod').placeholder = window.localStorage.podUrl;
-  else
-    document.getElementById('pod').placeholder = defaultPlaceholder;
+  document.getElementById('images').checked = (window.localStorage.images != null) ? (window.localStorage.images == "true") : true;
+  document.getElementById('markdown').checked = (window.localStorage.markdown != null) ? (window.localStorage.markdown == "true") : true;
+  document.getElementById('tags').checked = (window.localStorage.tags != null) ? (window.localStorage.tags == "true") : true;
+  document.getElementById('title').checked = (window.localStorage.title != null) ? (window.localStorage.title == "true") : true;
+  document.getElementById('url').checked = (window.localStorage.url != null) ? (window.localStorage.url == "true") : true;
+  document.getElementById('ytimg').checked = (window.localStorage.ytimg != null) ? (window.localStorage.ytimg == "true") : true;
 
-  if (window.localStorage.images != null)
-    document.getElementById('images').checked = window.localStorage.images;
-    document.getElementById('markdown').checked = window.localStorage.markdown;
-    document.getElementById('tags').checked = window.localStorage.tags;
-    document.getElementById('title').checked = window.localStorage.title;
-    document.getElementById('url').checked = window.localStorage.url;
-    document.getElementById('ytimg').checked = window.localStorage.ytimg;
 }
 
 </script>
