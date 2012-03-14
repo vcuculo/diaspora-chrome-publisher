@@ -39,6 +39,10 @@
     "message": "#Tags",
     "description": "Label: Ask always to insert a tag when publishing a content."
   },
+  "addMsgOpt": {
+    "message": "Message",
+    "description": "Label: Ask always to insert a message when publishing a content."
+  },
   "addTitleOpt": {
     "message": "Insert page title",
     "description": "Label: Insert page title when publishing a content."
@@ -50,6 +54,18 @@
   "addYTOpt": {
     "message": "YouTube preview",
     "description": "Label: Insert youtube preview image when sharing a video."
+  },
+  "addVMOpt": {
+    "message": "Vimeo preview",
+    "description": "Label: Insert vimeo preview image when sharing a video."
+  },
+  "addMsg": {
+    "message": "Add a message to your post\nor click Cancel.",
+    "description": "Prompt: Add message or click Cancel."
+  },
+  "addMsgText": {
+    "message": "Insert your comment here.",
+    "description": "Prompt: Add comment here."
   },
   "addTags": {
     "message": "Add tags to your post\nor click Cancel.",

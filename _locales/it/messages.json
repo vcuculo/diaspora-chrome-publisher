@@ -35,6 +35,10 @@
     "message": "Markdown",
     "description": "Label: Use Markdown to publish contents."
   },
+  "addMsgOpt": {
+    "message": "Messaggio",
+    "description": "Label: Ask always to insert a message when publishing a content."
+  },
   "addTagsOpt": {
     "message": "#Tags",
     "description": "Label: Ask always to insert a tag when publishing a content."
@@ -50,6 +54,18 @@
   "addYTOpt": {
     "message": "Anteprima YouTube",
     "description": "Label: Insert youtube preview image when sharing a video."
+  },
+  "addVMOpt": {
+    "message": "Anteprima Vimeo",
+    "description": "Label: Insert vimeo preview image when sharing a video."
+  },
+  "addMsg": {
+    "message": "Aggiungi un messaggio al post\noppure premi Annulla.",
+    "description": "Prompt: Add message or click Cancel."
+  },
+  "addMsgText": {
+    "message": "Inserisci il tuo commento qui.",
+    "description": "Prompt: Add comment here."
   },
   "addTags": {
     "message": "Aggiungi tag al post\noppure premi Annulla.",

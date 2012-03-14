@@ -43,6 +43,10 @@ function getImg(){
   return (window.localStorage != null && window.localStorage.images != null) ? window.localStorage.images : "true";
 }
 
+function getMsg(){
+  return (window.localStorage != null && window.localStorage.msg != null) ? window.localStorage.msg : "true";
+}
+
 function getTag(){
   return (window.localStorage != null && window.localStorage.tags != null) ? window.localStorage.tags : "true";
 }
@@ -63,31 +67,25 @@ function getYTimg(){
  return (window.localStorage != null && window.localStorage.ytimg != null) ? window.localStorage.ytimg : "true";
 }
 
-
-function addslashes( str ) {  
-  // Escapes single quote, double quotes and backslash characters in a string with backslashes    
-  //   
-  // version: 810.114  
-  // discuss at: http://phpjs.org/functions/addslashes  
-  // +   original by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)  
-  // +   improved by: Ates Goral (http://magnetiq.com)  
-  // +   improved by: marrtins  
-  // +   improved by: Nate  
-  // +   improved by: Onno Marsman  
-  // *     example 1: addslashes("kevin's birthday");  
-  // *     returns 1: 'kevin\'s birthday'  
-
-  return (str+'').replace(/([\\"'])/g, "\\$1").replace(/\0/g, "\\0");  
+function getVMimg(){
+ return (window.localStorage != null && window.localStorage.vmimg != null) ? window.localStorage.vmimg : "true";
 }
   
 function postMessage(tab_id, subject, url, selection, image) {
   var action_url = podUrl + "/bookmarklet?title=";
 
+  if (getMsg() == "true"){
+    var msg = prompt(chrome.i18n.getMessage("addMsg"), chrome.i18n.getMessage("addMsgText"));
+    if (msg != null) {
+      action_url += encodeURIComponent(msg) + "<br><br>";
+    }
+  }
+
   if (subject.length > 0 && getTitle() == "true")
     if(getMarkdown() == "true")
-      action_url += "**" + encodeURIComponent(addslashes(subject)) + "**";
+      action_url += "**" + encodeURIComponent(subject) + "**";
     else
-      action_url += encodeURIComponent(addslashes(subject));
+      action_url += encodeURIComponent(subject);
 
   if (url.length > 0 && getUrl() == "true")
     action_url += " • " + encodeURIComponent(url);
@@ -127,6 +125,9 @@ chrome.extension.onConnect.addListener(function(port) {
         googlurl(tab.url, function(shorturl) { postMessage(tab.id, info.title, shorturl, info.selection, info.image); });
 
       else if (info.video == true && getYTimg() == "false")
+        postMessage(tab.id, info.title, tab.url, info.selection, null);
+      
+      else if (info.video == true && getVMimg() == "false")
         postMessage(tab.id, info.title, tab.url, info.selection, null);
 
       else

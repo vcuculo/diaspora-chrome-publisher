@@ -47,10 +47,12 @@ function localize() {
   $("#chooseAbove").html(chrome.i18n.getMessage("chooseAbove"));
   $("label[id='addImageOpt']").append(chrome.i18n.getMessage("addImageOpt"));
   $("label[id='addMarkdownOpt']").append(chrome.i18n.getMessage("addMarkdownOpt"));
+  $("label[id='addMsgOpt']").append(chrome.i18n.getMessage("addMsgOpt"));
   $("label[id='addTagsOpt']").append(chrome.i18n.getMessage("addTagsOpt"));
   $("label[id='addUrlOpt']").append(chrome.i18n.getMessage("addUrlOpt"));
   $("label[id='addTitleOpt']").append(chrome.i18n.getMessage("addTitleOpt"));
   $("label[id='addYTOpt']").append(chrome.i18n.getMessage("addYTOpt"));
+  $("label[id='addVMOpt']").append(chrome.i18n.getMessage("addVMOpt"));
 }
 
 function submit() {
@@ -80,11 +82,13 @@ function submit() {
 
 function saveOption(){
   window.localStorage.images = document.getElementById('images').checked;
+  window.localStorage.msg = document.getElementById('msg').checked;
   window.localStorage.tags = document.getElementById('tags').checked;
   window.localStorage.markdown = document.getElementById('markdown').checked;
   window.localStorage.title = document.getElementById('title').checked;
   window.localStorage.url = document.getElementById('url').checked;
   window.localStorage.ytimg = document.getElementById('ytimg').checked;
+  window.localStorage.vmimg = document.getElementById('vmimg').checked;
 }
 
 function combo(thelist, theinput) {
@@ -136,11 +140,12 @@ function main() {
 
   document.getElementById('images').checked = (window.localStorage.images != null) ? (window.localStorage.images == "true") : true;
   document.getElementById('markdown').checked = (window.localStorage.markdown != null) ? (window.localStorage.markdown == "true") : true;
+  document.getElementById('msg').checked = (window.localStorage.msg != null) ? (window.localStorage.msg == "true") : true;
   document.getElementById('tags').checked = (window.localStorage.tags != null) ? (window.localStorage.tags == "true") : true;
   document.getElementById('title').checked = (window.localStorage.title != null) ? (window.localStorage.title == "true") : true;
   document.getElementById('url').checked = (window.localStorage.url != null) ? (window.localStorage.url == "true") : true;
   document.getElementById('ytimg').checked = (window.localStorage.ytimg != null) ? (window.localStorage.ytimg == "true") : true;
-
+  document.getElementById('vmimg').checked = (window.localStorage.vmimg != null) ? (window.localStorage.vmimg == "true") : true;
 }
 
 </script>
@@ -159,11 +164,13 @@ function main() {
     <label id="addImageOpt" for="images" style="font-family: Helvetica, Arial, sans-serif;"><input id="images" type="checkbox" onClick="javascript:saveOption()"></label>
     <label id="addMarkdownOpt" for="markdown" style="font-family: Helvetica, Arial, sans-serif;"><input id="markdown" type="checkbox" onClick="javascript:saveOption()"></label>
     <label id="addTagsOpt" for="tags" style="font-family: Helvetica, Arial, sans-serif;"><input id="tags" type="checkbox" onClick="javascript:saveOption()"></label>
+    <label id="addMsgOpt" for="msg" style="font-family: Helvetica, Arial, sans-serif;"><input id="msg" type="checkbox" onClick="javascript:saveOption()"></label>
     <br>
     <label id="addTitleOpt" for="title" style="font-family: Helvetica, Arial, sans-serif;"><input id="title" type="checkbox" onClick="javascript:saveOption()"></label>
     <label id="addUrlOpt" for="url" style="font-family: Helvetica, Arial, sans-serif;"><input id="url" type="checkbox" onClick="javascript:saveOption()"></label>
     <br>
     <label id="addYTOpt" for="ytimg" style="font-family: Helvetica, Arial, sans-serif;"><input id="ytimg" type="checkbox" onClick="javascript:saveOption()"></label>
+    <label id="addVMOpt" for="vmimg" style="font-family: Helvetica, Arial, sans-serif;"><input id="vmimg" type="checkbox" onClick="javascript:saveOption()"></label>
     <br><br>
     </div>
 <b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b>

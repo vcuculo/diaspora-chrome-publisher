@@ -27,6 +27,9 @@ port.onMessage.addListener(function(msg) {
     if (isYoutube() == true){
       sendMess(true, getYTimg(window.location.href));
     }
+    else if (isVimeo() == true){
+      getVMimg(window.location.href);
+    }
     else if (images.length == 0 && image != null)
       sendMess(false, image);
     else if (images.length == 1)
@@ -40,17 +43,37 @@ function isYoutube(){
   return (window.location.hostname == "www.youtube.com");
 }
 
+function isVimeo(){
+  return (window.location.hostname == "vimeo.com");
+}
+
 function getYTimg( url )
 {
   if(url === null){ return ""; }
 
-  var vid;
+  var id;
   var results;
 
   results = url.match("[\\?&]v=([^&#]*)");
-  vid = ( results === null ) ? url : results[1];
+  id = ( results === null ) ? url : results[1];
 
-  return "http://img.youtube.com/vi/"+vid+"/0.jpg";
+  return "http://img.youtube.com/vi/" + id + "/0.jpg";
+}
+
+function getVMimg( url )
+{
+  if(url === null){ return ""; }
+  
+  var id = url.split('/')[3];
+  $.ajax({
+    type:'GET',
+    url: 'http://vimeo.com/api/v2/video/' + id + '.json',
+    jsonp: 'callback',
+    dataType: 'jsonp',
+    success: function(data){
+      sendMess(true, data[0].thumbnail_large);
+    }
+  });
 }
 
 function sendMess(video, img){
