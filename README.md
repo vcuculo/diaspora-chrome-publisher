@@ -35,5 +35,3 @@ where `message` is the text that appears in extension, and `description` is just
 ### Donate
 
 **Flattr** [![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=mynameislasek&url=https://github.com/vcuculo/diaspora-chrome-publisher&title=Diaspora* Publisher&language=en_GB&tags=github&category=software) 
-
-**BitCoin** [![BitCoin](http://static-youtipit.s3-website-eu-west-1.amazonaws.com/Youtipitorange52.png)](http://utip.it/lasek)
