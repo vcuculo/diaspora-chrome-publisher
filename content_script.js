@@ -105,12 +105,9 @@ function chooseImage(images){
     if (min/max > 0.3 && max >= 100 && min >= 100){
      var imgSrc = images[i].src;
      if (c % cols == 0 && c > 0)
-       //elems += '<br>';
        elems += '</tr><tr>';
-     //elems += '<td onclick="getImage(\''+ encodeURIComponent(imgSrc) +'\')"><li><a href="#"><img src="'+ imgSrc +'"></a></li></td>';
      elems += '<td class="dthumb"><li><a href="#"><img src="'+ imgSrc +'"></a></li></td>';
      c++;
-     //elems += '<li><a href="#"><img src="'+ images[i].getAttribute("src") +'"></a></li>';
     }    
   }
 
@@ -126,7 +123,6 @@ function chooseImage(images){
     html += elems;
 
     html += '</table></ul></div></div>';
-    //html += '</ul></div>'; 
     $("body").append(html);
     $("body").animate({scrollTop:0}, 'slow');
   }
