@@ -76,7 +76,7 @@ function postMessage(tab_id, subject, url, selection, image) {
 
   if (getMsg() == "true"){
     var msg = prompt(chrome.i18n.getMessage("addMsg"), chrome.i18n.getMessage("addMsgText"));
-    if (msg != null) {
+    if (msg && msg !== "") {
       action_url += encodeURIComponent(msg) + "<br><br>";
     }
   }
@@ -95,15 +95,15 @@ function postMessage(tab_id, subject, url, selection, image) {
     action_url += " • " + encodeURIComponent(selection);
 
   if (image != null && getImg() == "true")
-    action_url += "<br>[![Image](" + image + ")](" + encodeURIComponent(url) + ")";
+    action_url += " <br> [ ![Image](" + image + ") ](" + encodeURIComponent(url) + ")";
 
   if (getTag() == "true"){
     var tags = prompt(chrome.i18n.getMessage("addTags"), chrome.i18n.getMessage("addTagsText"));
-    if (tags != null) {
-      action_url += "<br>" + encodeURIComponent(tags);
+    if (tags && tags !== "") {
+      action_url += " <br>" + encodeURIComponent(tags);
     }
   }
-  action_url += "<br><sub>&url=[via Diaspora* Publisher](" + encodeURIComponent("http://goo.gl/tmeFB") + ") -</sub>&v=1&";
+  action_url += " <br><sub>&url=[via Diaspora* Publisher](" + encodeURIComponent("http://goo.gl/tmeFB") + ") -</sub>&v=1&";
 
   if (!window.open(action_url+'noui=1&jump=doclose','diasporav1','location=yes,links=no,scrollbars=no,toolbar=no,width=590,height=250'))
     location.href = action_url+'jump=yes';
