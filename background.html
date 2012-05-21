@@ -39,65 +39,37 @@ function getPod(){
   podUrl = (window.localStorage != null && window.localStorage.podUrl != null) ? window.localStorage.podUrl : null;
 }
 
-function getImg(){
-  return (window.localStorage != null && window.localStorage.images != null) ? window.localStorage.images : "true";
+function getOpt(opt){
+  return (window.localStorage != null && window.localStorage.getItem(opt) != null) ? window.localStorage.getItem(opt) : "true";
 }
 
-function getMsg(){
-  return (window.localStorage != null && window.localStorage.msg != null) ? window.localStorage.msg : "true";
-}
-
-function getTag(){
-  return (window.localStorage != null && window.localStorage.tags != null) ? window.localStorage.tags : "true";
-}
-
-function getMarkdown(){
-  return (window.localStorage != null && window.localStorage.markdown != null) ? window.localStorage.markdown : "true";
-}
-
-function getTitle(){
- return (window.localStorage != null && window.localStorage.title != null) ? window.localStorage.title : "true";
-}
-
-function getUrl(){
- return (window.localStorage != null && window.localStorage.url != null) ? window.localStorage.url : "true";
-}
-
-function getYTimg(){
- return (window.localStorage != null && window.localStorage.ytimg != null) ? window.localStorage.ytimg : "true";
-}
-
-function getVMimg(){
- return (window.localStorage != null && window.localStorage.vmimg != null) ? window.localStorage.vmimg : "true";
-}
-  
 function postMessage(tab_id, subject, url, selection, image) {
   var action_url = podUrl + "/bookmarklet?title=";
 
-  if (getMsg() == "true"){
+  if (getOpt("msg") == "true"){
     var msg = prompt(chrome.i18n.getMessage("addMsg"), chrome.i18n.getMessage("addMsgText"));
     if (msg && msg !== "") {
       action_url += encodeURIComponent(msg) + "<br><br>";
     }
   }
 
-  if (subject.length > 0 && getTitle() == "true")
-    if(getMarkdown() == "true")
+  if (subject.length > 0 && getOpt("title") == "true")
+    if(getOpt("markdown") == "true")
       action_url += "**" + encodeURIComponent(subject) + "**";
     else
       action_url += encodeURIComponent(subject);
 
-  if (url.length > 0 && getUrl() == "true")
+  if (url.length > 0 && getOpt("url") == "true")
     action_url += " • " + encodeURIComponent(url);
 
   // Append the current selection & image to the end of the text message.
   if (selection.length > 0)
     action_url += " • " + encodeURIComponent(selection);
 
-  if (image != null && getImg() == "true")
+  if (image != null && getOpt("images") == "true")
     action_url += " <br> [ ![Image](" + image + ") ](" + encodeURIComponent(url) + ")";
 
-  if (getTag() == "true"){
+  if (getOpt("tags") == "true"){
     var tags = prompt(chrome.i18n.getMessage("addTags"), chrome.i18n.getMessage("addTagsText"));
     if (tags && tags !== "") {
       action_url += " <br>" + encodeURIComponent(tags);
@@ -124,17 +96,17 @@ chrome.extension.onConnect.addListener(function(port) {
       if (tab.url.length > max_url_length && info.video == false)
         googlurl(tab.url, function(shorturl) { postMessage(tab.id, info.title, shorturl, info.selection, info.image); });
 
-      else if (info.video == true && getYTimg() == "false")
+      else if (info.video == true && getOpt("ytimg") == "false")
         postMessage(tab.id, info.title, tab.url, info.selection, null);
       
-      else if (info.video == true && getVMimg() == "false")
+      else if (info.video == true && getOpt("vmimg") == "false")
         postMessage(tab.id, info.title, tab.url, info.selection, null);
 
       else
         postMessage(tab.id, info.title, tab.url, info.selection, info.image);
     }
     else if (info.type == "getImg")
-      port.postMessage({img: getImg()});
+      port.postMessage({img: getOpt("images")});
   });
 });
 

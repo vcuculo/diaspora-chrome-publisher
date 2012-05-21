@@ -13,7 +13,7 @@ port.postMessage({type : "getImg"});
 
 port.onMessage.addListener(function(msg) {
 
-  if (msg.img == "false")
+  if (msg.img == "false" || (images.length == 0 && image == null))
     sendMess(false);
   
   else if (msg.img == "true"){
@@ -31,9 +31,7 @@ port.onMessage.addListener(function(msg) {
       getVMimg(window.location.href);
     }
     else if (images.length == 0 && image != null)
-      sendMess(false, image);
-    else if (images.length == 1)
-      sendMess(false, images[0].src);
+      chooseImage(image);
     else if (images.length > 0)
       chooseImage(images);
   }

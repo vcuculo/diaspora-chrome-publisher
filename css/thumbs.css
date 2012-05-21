@@ -54,3 +54,12 @@ ul#thumbs a:hover{
   z-index:1000;
   border:none;		
 }
+td.dthumb{
+  margin:0;
+  padding:0;
+}
+#dthumbs{
+  margin:0;
+  padding:0;
+  border-collapse:none;
+}
