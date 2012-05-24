@@ -1,13 +1,20 @@
 <!--
  * Diaspora* Publisher extension.
- * Based on Email this page (by Google) extension
- * http://code.google.com/chrome/extensions/samples.html#028eb5364924344029bcbe1d527f132fc72b34e5
- * Author: Vittorio Cuculo <vittorio.cuculo@gmail.com>
- * Diaspora: vcuculo@diaspora.eigenlab.org
+ * Copyright (C) 2012  Vittorio Cuculo <vittorio.cuculo@gmail.com>
  *
- * Copyright (c) 2009 The Chromium Authors. All rights reserved.  Use of this
- * source code is governed by a BSD-style license that can be found in the
- * LICENSE file.
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 -->
 <html>
 <head>
@@ -30,6 +37,17 @@ function googlurl(url, cb) {
       } catch (e) {
         result = null;
       }
+      cb(result);
+    }
+  });
+}
+
+function tinyurl(url, cb) {
+  $.ajax({
+    type: 'GET',
+    url: "http://tinyurl.com/api-create.php",
+    data: {url: url},
+    success: function (result) {
       cb(result);
     }
   });
@@ -92,9 +110,13 @@ chrome.extension.onConnect.addListener(function(port) {
       var max_url_length = 25;
       if (info.selection.length > max_length)
         info.selection = info.selection.substring(0, max_length);
-   
+
+      // If is video keep original url, otherwise embedding doesnt work
       if (tab.url.length > max_url_length && info.video == false)
-        googlurl(tab.url, function(shorturl) { postMessage(tab.id, info.title, shorturl, info.selection, info.image); });
+        if (getOpt("short") == "tiny")
+          tinyurl(tab.url, function(shorturl) { postMessage(tab.id, info.title, shorturl, info.selection, info.image); });
+        else
+          googlurl(tab.url, function(shorturl) { postMessage(tab.id, info.title, shorturl, info.selection, info.image); });
 
       else if (info.video == true && getOpt("ytimg") == "false")
         postMessage(tab.id, info.title, tab.url, info.selection, null);
