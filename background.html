@@ -22,6 +22,39 @@
 <script>
 
 var podUrl = "";
+var t;
+
+getPod();
+
+if (podUrl != "")
+  checkNotifications();
+
+function checkNotifications(){
+  t = setTimeout("checkNotifications()", 300000);
+  getNotifications();
+}
+
+function getNotifications(){
+  $.ajax({
+    type: 'GET',
+    dataType: 'json',
+    url: podUrl + "/notifications.json",
+    success: function (result) {
+      showNotifications(result);
+    }
+  });
+}
+
+function showNotifications(result){
+  var n = 0;
+  for(var x = 0; result.length > x; x++) {
+    var unread =  result[x][Object.keys(result[x])[0]].unread;
+    if (unread == true)
+      n++;
+  }
+  if (n > 0)
+    chrome.browserAction.setBadgeText({text: n.toString()});
+}
 
 function googlurl(url, cb) {
   $.ajax({
