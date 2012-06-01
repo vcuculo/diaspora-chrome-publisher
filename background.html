@@ -35,8 +35,12 @@ else if (getOpt("notify") == "true")
   checkNotifications();
 
 function checkNotifications(){
-  t = setTimeout("checkNotifications()", minutes);
-  getNotifications();
+  if (getOpt("notify") == "true"){
+    t = setTimeout("checkNotifications()", minutes);
+    getNotifications();
+  }
+  else
+    resetNotifications();
 }
 
 function getNotifications(){
