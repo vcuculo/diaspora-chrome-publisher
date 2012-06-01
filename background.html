@@ -21,28 +21,42 @@
 <script src="js/jquery.min.js"></script>
 <script>
 
-var podUrl = "";
+var podUrl;
+var minutes = getOpt("minutes");
 var t;
 
 getPod();
 
-if (podUrl != "")
+if (podUrl == null){
+  alert(chrome.i18n.getMessage("setPodUrl"));
+  chrome.tabs.create({url : "options.html"});
+}
+else if (getOpt("notify") == "true")
   checkNotifications();
 
 function checkNotifications(){
-  t = setTimeout("checkNotifications()", 300000);
+  t = setTimeout("checkNotifications()", minutes);
   getNotifications();
 }
 
 function getNotifications(){
+  getPod();
+  
   $.ajax({
     type: 'GET',
     dataType: 'json',
     url: podUrl + "/notifications.json",
     success: function (result) {
       showNotifications(result);
+    },
+    error: function() {
+      resetNotifications();
     }
   });
+}
+
+function resetNotifications(){
+  chrome.browserAction.setBadgeText({text: ''});
 }
 
 function showNotifications(result){
@@ -54,6 +68,8 @@ function showNotifications(result){
   }
   if (n > 0)
     chrome.browserAction.setBadgeText({text: n.toString()});
+  else
+    resetNotifications();
 }
 
 function googlurl(url, cb) {
@@ -168,12 +184,6 @@ chrome.extension.onConnect.addListener(function(port) {
 // Called when the user clicks on the browser action icon.
 chrome.browserAction.onClicked.addListener(function(tab) {
   getPod();
-
-  if (podUrl == null){
-    alert(chrome.i18n.getMessage("setPodUrl"));
-    chrome.tabs.create({url : "options.html"});
-    return;
-  }
 
   if (podUrl.indexOf("http") == -1)
     podUrl = "http://".concat(podUrl);

@@ -74,5 +74,17 @@
   "addTagsText": {
     "message": "Insert #tag here.",
     "description": "Prompt: Add #tags here."
+  },
+  "enableNotify": {
+    "message": "Enable notifications",
+    "description": "Label: Enable notifications option"
+  },
+  "checkEvery": {
+    "message": "Check every ",
+    "description": "Label: Check every"
+  },
+  "minutes": {
+    "message": "minutes",
+    "description": "Label: Minutes"
   }
 }
