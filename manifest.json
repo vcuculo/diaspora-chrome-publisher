@@ -1,7 +1,7 @@
 {
     "name": "Diaspora* Publisher",
     "description": "__MSG_extDescription__",
-    "version": "1.9.0",
+    "version": "1.9.1",
     "default_locale": "en",
     "background_page": "background.html",
     "icons": { "48": "icon.png" },
