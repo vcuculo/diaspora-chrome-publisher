@@ -106,7 +106,7 @@ function saveOption(){
   var short = document.getElementsByName('short');
   window.localStorage.short = (short[0].checked) ? short[0].value : short[1].value;
 
-  if (window.localStorage.getItem("notify") == "true"){
+  if (window.localStorage.notify == "true"){
     var back = chrome.extension.getBackgroundPage();
     back.checkNotifications();
   }

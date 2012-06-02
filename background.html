@@ -22,7 +22,7 @@
 <script>
 
 var podUrl;
-var minutes = getOpt("minutes");
+var minutes = getMinutes();
 var t;
 
 getPod();
@@ -36,6 +36,7 @@ else if (getOpt("notify") == "true")
 
 function checkNotifications(){
   if (getOpt("notify") == "true"){
+    minutes = getMinutes();
     t = setTimeout("checkNotifications()", minutes);
     getNotifications();
   }
@@ -108,6 +109,10 @@ function tinyurl(url, cb) {
 
 function getPod(){
   podUrl = (window.localStorage != null && window.localStorage.podUrl != null) ? window.localStorage.podUrl : null;
+}
+
+function getMinutes(){
+  podUrl = (window.localStorage != null && window.localStorage.minutes != null) ? window.localStorage.minutes : 300000;
 }
 
 function getOpt(opt){
