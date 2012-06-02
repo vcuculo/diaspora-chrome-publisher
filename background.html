@@ -112,7 +112,7 @@ function getPod(){
 }
 
 function getMinutes(){
-  podUrl = (window.localStorage != null && window.localStorage.minutes != null) ? window.localStorage.minutes : 300000;
+  return (window.localStorage != null && window.localStorage.minutes != null) ? window.localStorage.minutes : "300000";
 }
 
 function getOpt(opt){
