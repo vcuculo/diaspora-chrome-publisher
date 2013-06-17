@@ -54,24 +54,24 @@
     	<input id="pod" name="podurl" size="30" style="font-size: 30px;" class="ui-autocomplete-input"><input id="savepod" type="submit" style="font-size: 30px;">
     	<br><br>
     </form>
-    <label id="addImageOpt" for="images" class="optioninput"><input id="images" type="checkbox"></label>
-    <label id="addMarkdownOpt" for="markdown" class="optioninput"><input id="markdown" type="checkbox""></label>
-    <label id="addTagsOpt" for="tags" class="optioninput""><input id="tags" type="checkbox"></label>
-    <label id="addMsgOpt" for="msg" class="optioninput"><input id="msg" type="checkbox"></label>
+    <label id="addImageOpt" for="images" class="optioninput"><input id="images" type="checkbox" onClick="javascript:saveOption()"></label>
+    <label id="addMarkdownOpt" for="markdown" class="optioninput"><input id="markdown" type="checkbox" onClick="javascript:saveOption()"></label>
+    <label id="addTagsOpt" for="tags" class="optioninput""><input id="tags" type="checkbox" onClick="javascript:saveOption()"></label>
+    <label id="addMsgOpt" for="msg" class="optioninput"><input id="msg" type="checkbox" onClick="javascript:saveOption()"></label>
     <br>
-    <label id="addTitleOpt" for="title" class="optioninput"><input id="title" type="checkbox"></label>
-    <label id="addUrlOpt" for="url" class="optioninput"><input id="url" type="checkbox"></label>
+    <label id="addTitleOpt" for="title" class="optioninput"><input id="title" type="checkbox" onClick="javascript:saveOption()"></label>
+    <label id="addUrlOpt" for="url" class="optioninput"><input id="url" type="checkbox" onClick="javascript:saveOption()"></label>
     <br>
-    <label id="addYTOpt" for="ytimg" class="optioninput"><input id="ytimg" type="checkbox"></label>
-    <label id="addVMOpt" for="vmimg" class="optioninput"><input id="vmimg" type="checkbox"></label>
+    <label id="addYTOpt" for="ytimg" class="optioninput"><input id="ytimg" type="checkbox" onClick="javascript:saveOption()"></label>
+    <label id="addVMOpt" for="vmimg" class="optioninput"><input id="vmimg" type="checkbox" onClick="javascript:saveOption()"></label>
     <br><br>
     <font class="optioninput">Short URL service:</font>
-    <label class="optioninput"><input type="radio" id="short" name="short" value="google">Goo.gl</label>
-    <label class="optioninput"><input type="radio" id="short" name="short" value="tiny">Tinyurl.com</label>
+    <label class="optioninput"><input type="radio" id="short" name="short" value="google" onClick="javascript:saveOption()">Goo.gl</label>
+    <label class="optioninput"><input type="radio" id="short" name="short" value="tiny" onClick="javascript:saveOption()">Tinyurl.com</label>
     <br><br>
-    <label id="enableNotify" for="notify" class="optioninput"><input id="notify" type="checkbox"></label>
+    <label id="enableNotify" for="notify" class="optioninput"><input id="notify" type="checkbox" onClick="javascript:saveOption()"></label>
     <br>
-    <label id="checkEvery" class="optioninput"></label><select id="minutes">
+    <label id="checkEvery" class="optioninput"></label><select id="minutes" onChange="javascript:saveOption()">
     <option value="60000">1</option>
     <option value="300000">5</option>
     <option value="600000">10</option>

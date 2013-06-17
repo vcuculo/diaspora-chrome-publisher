@@ -5,7 +5,7 @@
     "manifest_version": 2,
     "default_locale": "en",
     "background": {
-      "scripts": ["js/jquery.min.js", "background.js"]
+      "scripts": [ "js/jquery.min.js", "background.js"]
     },
     "web_accessible_resources": [
       "icon.png"
