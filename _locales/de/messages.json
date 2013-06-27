@@ -1,0 +1,90 @@
+{
+  "extDescription": {
+    "message": "Teile deine favorisierten Seiten mit deinen Diaspora* Kontakten und empfange Benachrichtigungen direkt in deinem Browser.",
+    "description": "Text: Extension description."
+  },
+  "extAction": {
+    "message": "Veröffentliche diese Seite auf Diaspora",
+    "description": "Hover: Extension action when hover icon."
+  },
+  "localStorage": {
+    "message": "LocalStorage ist zum Ändern der Pod-URL erforderlich.",
+    "description": "Alert: Localstorage not supported"
+  },
+  "urlSaved": {
+    "message": "Pod Url gespeichert!",
+    "description": "Alert: Notification in options page"
+  },
+  "choosePod": {
+    "message": "Gib die URL deines Diaspora*-Pod ein:",
+    "description": "Text: Choose your Diaspora* Pod url, or insert a new one:"
+  },
+  "optionsTitle": {
+    "message": "Optionen für die Diaspora* Publisher Erweiterung",
+    "description": "Title: Options for the Diaspora* Publisher extension"
+  },
+  "setPodUrl": {
+    "message": "Gib deinen Diaspora*-Pod an, bevor du die Erweiterung nutzen kannst.",
+    "description": "Alert: Set your Diaspora* Pod Url before use."
+  },
+  "addImageOpt": {
+    "message": "Bilder",
+    "description": "Label: Shows image selector prompt when publishing a content."
+  },
+  "addMarkdownOpt": {
+    "message": "Markdown",
+    "description": "Label: Use Markdown to publish contents."
+  },
+  "addTagsOpt": {
+    "message": "#Tags",
+    "description": "Label: Ask always to insert a tag when publishing a content."
+  },
+  "addMsgOpt": {
+    "message": "Mittelung",
+    "description": "Label: Ask always to insert a message when publishing a content."
+  },
+  "addTitleOpt": {
+    "message": "Seiten-Titel",
+    "description": "Label: Insert page title when publishing a content."
+  },
+  "addUrlOpt": {
+    "message": "Seiten-URL",
+    "description": "Label: Insert page URL when publishing a content."
+  },
+  "addYTOpt": {
+    "message": "YouTube-Vorschau",
+    "description": "Label: Insert youtube preview image when sharing a video."
+  },
+  "addVMOpt": {
+    "message": "Vimeo-Vorschau",
+    "description": "Label: Insert vimeo preview image when sharing a video."
+  },
+  "addMsg": {
+    "message": "Ergänze eine Mittelung oder brich ab.",
+    "description": "Prompt: Add message or click Cancel."
+  },
+  "addMsgText": {
+    "message": "Gib hier deinen Kommentar ein",
+    "description": "Prompt: Add comment here."
+  },
+  "addTags": {
+    "message": "Tagge deine Mittelung oder brich ab.",
+    "description": "Prompt: Add tags or click Cancel."
+  },
+  "addTagsText": {
+    "message": "Gib hier deine #tags ein.",
+    "description": "Prompt: Add #tags here."
+  },
+  "enableNotify": {
+    "message": "Aktiviere Benachrichtigungen",
+    "description": "Label: Enable notifications option"
+  },
+  "checkEvery": {
+    "message": "Prüfe alle ",
+    "description": "Label: Check every"
+  },
+  "minutes": {
+    "message": "Minuten",
+    "description": "Label: Minutes"
+  }
+}
