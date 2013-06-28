@@ -60,19 +60,19 @@
     "description": "Label: Insert vimeo preview image when sharing a video."
   },
   "addMsg": {
-    "message": "Ergänze eine Mittelung oder brich ab.",
+    "message": "Möchtest du ein paar Worte dazu schreiben?",
     "description": "Prompt: Add message or click Cancel."
   },
   "addMsgText": {
-    "message": "Gib hier deinen Kommentar ein",
+    "message": "Dein Kommentar ...",
     "description": "Prompt: Add comment here."
   },
   "addTags": {
-    "message": "Tagge deine Mittelung oder brich ab.",
+    "message": "Möchtest du deine Nachricht taggen?",
     "description": "Prompt: Add tags or click Cancel."
   },
   "addTagsText": {
-    "message": "Gib hier deine #tags ein.",
+    "message": "Deine #tags ...",
     "description": "Prompt: Add #tags here."
   },
   "enableNotify": {
