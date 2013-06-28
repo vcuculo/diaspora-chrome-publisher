@@ -17,70 +17,142 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 -->
 <html>
-<head>
-  <title></title>
-<style>
-.b1, .b2, .b3, .b4{font-size:1px; overflow:hidden; display:block;}
-.b1 {height:1px; background:#888; margin:0 5px;}
-.b2 {height:1px; background:#ddd; border-right:2px solid #888; border-left:2px solid #888; margin:0 3px;}
-.b3 {height:1px; background:#ddd; border-right:1px solid #888; border-left:1px solid #888; margin:0 2px;}
-.b4 {height:2px; background:#ddd; border-right:1px solid #888; border-left:1px solid #888; margin:0 1px;}
-.contentb {margin: auto;background: #ddd; border-right:1px solid #888; border-left:1px solid #888;}
-.contentb div {margin-left: 5px;font-size: 30px;font-family: Helvetica, Arial, sans-serif;}
-.optioninput {font-family: Helvetica, Arial, sans-serif;}
-#html, body {
-  position: absolute;
-  top: 25%;
-  left: 25%;
-  width: 50%;
-  height: 50%;
-  background-color: #CCC;
-  padding: 5px;
-}
-</style>
-<link type="text/css" href="css/smoothness/jquery-ui-1.8.16.custom.css" rel="Stylesheet" />	
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/jquery-ui-1.8.16.custom.min.js"></script>
-<script type="text/javascript" src="js/options.js"></script>
-</head>
-<body>
-<center>
-<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
-    <div class="contentb">
-    <br>
-    <form action="#">
-    	<strong><div id="choosePod"></div></strong>
-    	<br><br>
-    	<input id="pod" name="podurl" size="30" style="font-size: 30px;" class="ui-autocomplete-input"><input id="savepod" type="submit" style="font-size: 30px;">
-    	<br><br>
-    </form>
-    <label id="addImageOpt" for="images" class="optioninput"><input id="images" type="checkbox"></label>
-    <label id="addMarkdownOpt" for="markdown" class="optioninput"><input id="markdown" type="checkbox""></label>
-    <label id="addTagsOpt" for="tags" class="optioninput""><input id="tags" type="checkbox"></label>
-    <label id="addMsgOpt" for="msg" class="optioninput"><input id="msg" type="checkbox"></label>
-    <br>
-    <label id="addTitleOpt" for="title" class="optioninput"><input id="title" type="checkbox"></label>
-    <label id="addUrlOpt" for="url" class="optioninput"><input id="url" type="checkbox"></label>
-    <br>
-    <label id="addYTOpt" for="ytimg" class="optioninput"><input id="ytimg" type="checkbox"></label>
-    <label id="addVMOpt" for="vmimg" class="optioninput"><input id="vmimg" type="checkbox"></label>
-    <br><br>
-    <font class="optioninput">Short URL service:</font>
-    <label class="optioninput"><input type="radio" id="short" name="short" value="google">Goo.gl</label>
-    <label class="optioninput"><input type="radio" id="short" name="short" value="tiny">Tinyurl.com</label>
-    <br><br>
-    <label id="enableNotify" for="notify" class="optioninput"><input id="notify" type="checkbox"></label>
-    <br>
-    <label id="checkEvery" class="optioninput"></label><select id="minutes">
-    <option value="60000">1</option>
-    <option value="300000">5</option>
-    <option value="600000">10</option>
-    <option value="1200000">20</option>
-    <option value="1800000">30</option>
-    </select><label id="minutes" class="optioninput"></label>
-    <br><br>
+  <head>
+    <title>Diaspora Publisher Options</title>
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui-1.8.16.custom.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/options.js"></script>
+    <style>
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 id="optionsTitle"></h1>
+      <form class="form-horizontal">
+        <fieldset>
+          <legend id="podOptionsTitle"></legend>
+          <div class="control-group">
+            <label id="podOpt" for="pod" class="control-label"></label>
+            <div class="controls">
+            	<input id="pod" name="podurl" size="30" class="ui-autocomplete-input">
+              <p id="choosePod" class="help-block"></p>
+            </div>
+          </div>
+          <div class="control-group">
+            <div class="controls">
+              <input id="savepod" type="submit" class="btn btn-primary">
+            </div>
+          </div>
+        </fieldset>
+      </form>
+
+      <form class="form-horizontal">
+        <fieldset>
+          <legend id="postOptionsTitle"></legend>
+
+          <div class="control-group">
+            <label id="addMarkup" class="control-label"></label>
+            <div class="controls">
+              <label id="addMarkdownOpt" for="markdown" class="optioninput checkbox">
+                <input id="markdown" type="checkbox"">
+              </label>
+              <p id="addMarkupHelp" class="help-block"></p>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label id="addComment" class="control-label"></label>
+            <div class="controls">
+              <label id="addTagsOpt" for="tags" class="optioninput checkbox">
+                <input id="tags" type="checkbox">
+              </label>
+              <label id="addMsgOpt" for="msg" class="optioninput checkbox">
+                <input id="msg" type="checkbox">
+              </label>
+              <p id="addCommentHelp" class="help-block"></p>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label id="addPageLink" class="control-label"></label>
+            <div class="controls">
+              <label id="addTitleOpt" for="title" class="optioninput checkbox">
+                <input id="title" type="checkbox">
+              </label>
+              <label id="addUrlOpt" for="url" class="optioninput checkbox">
+                <input id="url" type="checkbox">
+              </label>
+              <p id="addPageLinkHelp" class="help-block"></p>
+            </div>
+          </div>
+          
+          <div class="control-group">
+            <div class="control-group">
+              <label id="shortOpt" class="optioninput control-label"></label>
+              <div class="controls">
+                <label class="optioninput radio">
+                  <input type="radio" id="short" name="short" value="google">
+                  Goo.gl
+                </label>
+                <label class="optioninput radio">
+                  <input type="radio" id="short" name="short" value="tiny">
+                  Tinyurl.com
+                </label>
+              <p id="shortOptHelp" class="help-block"></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label id="addPreview" class="control-label"></label>
+            <div class="controls">
+              <label id="addImageOpt" for="images" class="optioninput checkbox">
+                <input id="images" type="checkbox">
+              </label>
+              <label id="addYTOpt" for="ytimg" class="optioninput checkbox">
+                <input id="ytimg" type="checkbox">
+              </label>
+              <label id="addVMOpt" for="vmimg" class="optioninput checkbox">
+                <input id="vmimg" type="checkbox">
+              </label>
+              <p id="addPreviewHelp" class="help-block"></p>
+            </div>
+          </div>
+          
+        </fieldset>
+      </form>
+
+      <form class="form-horizontal">
+        <fieldset>
+          <legend id="notificationOptionsTitle"></legend>
+          <div class="control-group">
+            <label id="enableNotify" for="notify" class="optioninput controls">
+              <input id="notify" type="checkbox">
+            </label>
+          </div>
+          <div class="control-group">
+            <label id="checkEvery" for="minutes" class="optioninput control-label"></label>
+            <div class="controls">
+              <div class="input-append">
+                <select id="minutes">
+                  <option value="60000">1</option>
+                  <option value="300000">5</option>
+                  <option value="600000">10</option>
+                  <option value="1200000">20</option>
+                  <option value="1800000">30</option>
+                </select>
+                <span class="add-on" id="minutes" class="optioninput"></span>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    <hr>
+    <footer>
+      <p id="extProjectAbout"> <a id="githubLink" href="https://github.com/vcuculo/diaspora-chrome-publisher"></a> </p>
+    </footer>
     </div>
-<b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b>
-</center>
-</body>
+  </body>
 </html>

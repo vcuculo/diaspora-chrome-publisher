@@ -11,17 +11,41 @@
     "message": "LocalStorage is required for changing pod url.",
     "description": "Alert: Localstorage not supported"
   },
+  "optionsTitle": {
+    "message": "Options",
+    "description": "Title: Options for the Diaspora* Publisher extension"
+  },
+  "aboutTitle": {
+    "message": "About this extension",
+    "description": "Title: About the Diaspora* Publisher extension"
+  },
   "urlSaved": {
     "message": "Pod Url saved!",
     "description": "Alert: Notification in options page"
   },
+  "podOptionsTitle": {
+    "message": "Pod",
+    "description": "Title: Pod related Options."
+  },
+  "postOptionsTitle": {
+    "message": "Postings",
+    "description": "Title: Post related Options."
+  },
+  "notificationOptionsTitle": {
+    "message": "Notifications",
+    "description": "Title: Notification related Options."
+  },
+  "podOpt": {
+    "message": "Pod-URL",
+    "description": "Label: Pod-URL"
+  },
   "choosePod": {
-    "message": "Insert your Diaspora* pod:",
+    "message": "Insert your Diaspora* pod.",
     "description": "Text: Choose your Diaspora* Pod url, or insert a new one:"
   },
-  "optionsTitle": {
-    "message": "Options for the Diaspora* Publisher extension",
-    "description": "Title: Options for the Diaspora* Publisher extension"
+  "savePodOptions": {
+    "message": "Save",
+    "description": "Action: Save the Pod options."
   },
   "setPodUrl": {
     "message": "Set your Diaspora* pod before use.",
@@ -31,9 +55,25 @@
     "message": "Images",
     "description": "Label: Shows image selector prompt when publishing a content."
   },
+  "addMarkup": {
+    "message": "Markup",
+    "description": "Label: Use Markup to structure contents."
+  },
+  "addMarkupHelp": {
+    "message": "With Markup languages, elements like links and images can be displayed. <br> Which languages should be used?",
+    "description": "Help: Use Markup to structure contents."
+  },
   "addMarkdownOpt": {
     "message": "Markdown",
     "description": "Label: Use Markdown to publish contents."
+  },
+  "addComment": {
+    "message": "Comment",
+    "description": "Label: Add a comment to the post."
+  },
+  "addCommentHelp": {
+    "message": "Add your post with a personal comment or some tags.",
+    "description": "Help: Add a comment to your posting."
   },
   "addTagsOpt": {
     "message": "#Tags",
@@ -43,6 +83,14 @@
     "message": "Message",
     "description": "Label: Ask always to insert a message when publishing a content."
   },
+  "addPageLink": {
+    "message": "Link",
+    "description": "Label: Insert a link to the page."
+  },
+  "addPageLinkHelp": {
+    "message": "Add a link of the page to your posting.",
+    "description": "Help: Add a reference to the page in your post."
+  },
   "addTitleOpt": {
     "message": "Insert page title",
     "description": "Label: Insert page title when publishing a content."
@@ -50,6 +98,14 @@
   "addUrlOpt": {
     "message": "Insert page URL",
     "description": "Label: Insert page URL when publishing a content."
+  },
+  "addPreview": {
+    "message": "Preview",
+    "description": "Label: Insert media when sharing a page."
+  },
+  "addPreviewHelp": {
+    "message": "Add a preview of the content to your posting.",
+    "description": "Help:  Insert media when sharing a page."
   },
   "addYTOpt": {
     "message": "YouTube preview",
@@ -75,6 +131,14 @@
     "message": "Insert #tag here.",
     "description": "Prompt: Add #tags here."
   },
+  "shortOpt": {
+    "message": "URL Shortener",
+    "description": "Label: Select Short URL service:"
+  },
+  "shortOptHelp": {
+    "message": "Shorten the URLs in your posting.",
+    "description": "Help: Select Short URL service:"
+  },
   "enableNotify": {
     "message": "Enable notifications",
     "description": "Label: Enable notifications option"
@@ -86,5 +150,13 @@
   "minutes": {
     "message": "minutes",
     "description": "Label: Minutes"
+  },
+  "githubLink": {
+    "message": "GitHub project",
+    "description": "Label: Github Project"
+  },
+  "extProjectAbout": {
+    "message": "This is free software, take part on the developement at ",
+    "description": "Text: Description and link to the Github Project"
   }
 }

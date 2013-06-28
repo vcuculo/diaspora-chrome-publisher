@@ -6,20 +6,49 @@ var pods = new Array();
 
 function localize() {
   document.title = chrome.i18n.getMessage("optionsTitle");
-  $("#choosePod").html(chrome.i18n.getMessage("choosePod"));
-  $("#chooseAbove").html(chrome.i18n.getMessage("chooseAbove"));
-  $("label[id='addImageOpt']").append(chrome.i18n.getMessage("addImageOpt"));
+
+  $("h1#optionsTitle").html(chrome.i18n.getMessage("optionsTitle"));
+
+  $("legend#podOptionsTitle").html(chrome.i18n.getMessage("podOptionsTitle"));
+  $("label[id='podOpt']").append(chrome.i18n.getMessage("podOpt"));
+  $("input[id='savepod']").attr('value', chrome.i18n.getMessage("savePodOptions"));
+
+  $("legend#postOptionsTitle").html(chrome.i18n.getMessage("postOptionsTitle"));
+  $("p#choosePod").html(chrome.i18n.getMessage("choosePod"));
+
+  $("label[id='addMarkup']").append(chrome.i18n.getMessage("addMarkup"));
+  $("p#addMarkupHelp").html(chrome.i18n.getMessage("addMarkupHelp"));
   $("label[id='addMarkdownOpt']").append(chrome.i18n.getMessage("addMarkdownOpt"));
+
+  $("label[id='addComment']").append(chrome.i18n.getMessage("addComment"));
+  $("p#addCommentHelp").html(chrome.i18n.getMessage("addCommentHelp"));
   $("label[id='addMsgOpt']").append(chrome.i18n.getMessage("addMsgOpt"));
   $("label[id='addTagsOpt']").append(chrome.i18n.getMessage("addTagsOpt"));
+
+  $("label[id='addPageLink']").append(chrome.i18n.getMessage("addPageLink"));
+  $("p#addPageLinkHelp").append(chrome.i18n.getMessage("addPageLinkHelp"));
   $("label[id='addUrlOpt']").append(chrome.i18n.getMessage("addUrlOpt"));
   $("label[id='addTitleOpt']").append(chrome.i18n.getMessage("addTitleOpt"));
+
+  $("label[id='addPreview']").append(chrome.i18n.getMessage("addPreview"));
+  $("p#addPreviewHelp").append(chrome.i18n.getMessage("addPreviewHelp"));
+  $("label[id='addImageOpt']").append(chrome.i18n.getMessage("addImageOpt"));
   $("label[id='addYTOpt']").append(chrome.i18n.getMessage("addYTOpt"));
   $("label[id='addVMOpt']").append(chrome.i18n.getMessage("addVMOpt"));
+
+  $("label[id='shortOpt']").append(chrome.i18n.getMessage("shortOpt"));
+  $("p#shortOptHelp").append(chrome.i18n.getMessage("shortOptHelp"));
+
+  $("legend#notificationOptionsTitle").html(chrome.i18n.getMessage("notificationOptionsTitle"));
   $("label[id='enableNotify']").append(chrome.i18n.getMessage("enableNotify"));
   $("label[id='checkEvery']").append(chrome.i18n.getMessage("checkEvery"));
-  $("label[id='minutes']").append(chrome.i18n.getMessage("minutes"));
+  $("span[id='minutes']").html(chrome.i18n.getMessage("minutes"));
   $("label[id='checkNow']").append(chrome.i18n.getMessage("checkNow"));
+
+  $("a[id='githubLink']").html(chrome.i18n.getMessage("githubLink"));
+  $("a[id='githubLink']").parent().prepend(chrome.i18n.getMessage("extProjectAbout"));
+  $("a[id='githubLink']").parent().append('.');
+
 }
 
 function submit() {

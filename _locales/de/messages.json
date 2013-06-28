@@ -11,13 +11,41 @@
     "message": "LocalStorage ist zum Ändern der Pod-URL erforderlich.",
     "description": "Alert: Localstorage not supported"
   },
+  "optionsTitle": {
+    "message": "Einstellungen",
+    "description": "Title: Options - Page title."
+  },
+  "aboutTitle": {
+    "message": "Über diese Erweiterung",
+    "description": "Title: About the Diaspora* Publisher extension"
+  },
   "urlSaved": {
     "message": "Pod Url gespeichert!",
     "description": "Alert: Notification in options page"
   },
+  "podOptionsTitle": {
+    "message": "Pod",
+    "description": "Title: Pod related Options."
+  },
+  "postOptionsTitle": {
+    "message": "Posts",
+    "description": "Title: Post related Options."
+  },
+  "notificationOptionsTitle": {
+    "message": "Benachrichtigungen",
+    "description": "Title: Notification related Options."
+  },
+  "podOpt": {
+    "message": "Pod-URL",
+    "description": "Label: Pod-URL"
+  },
   "choosePod": {
-    "message": "Gib die URL deines Diaspora*-Pod ein:",
+    "message": "Die URL deines Diaspora*-Pod.",
     "description": "Text: Choose your Diaspora* Pod url, or insert a new one:"
+  },
+  "savePodOptions": {
+    "message": "Speichern",
+    "description": "Action: Save the Pod options."
   },
   "optionsTitle": {
     "message": "Optionen für die Diaspora* Publisher Erweiterung",
@@ -27,13 +55,25 @@
     "message": "Gib deinen Diaspora*-Pod an, bevor du die Erweiterung nutzen kannst.",
     "description": "Alert: Set your Diaspora* Pod Url before use."
   },
-  "addImageOpt": {
-    "message": "Bilder",
-    "description": "Label: Shows image selector prompt when publishing a content."
+  "addMarkup": {
+    "message": "Markup",
+    "description": "Label: Use Markup to structure contents."
+  },
+  "addMarkupHelp": {
+    "message": "Mit Markup-Sprachen können Elemente wie Links, Bilder dargestellt werden. <br> Welche Sprachen sollen verwendet werden?",
+    "description": "Help: Use Markup to structure contents."
   },
   "addMarkdownOpt": {
     "message": "Markdown",
     "description": "Label: Use Markdown to publish contents."
+  },
+  "addComment": {
+    "message": "Kommentar",
+    "description": "Label: Add a comment to the post."
+  },
+  "addCommentHelp": {
+    "message": "Ergänze deinen Post mit einem persönlichen Kommentar oder Tags.",
+    "description": "Help: Add a comment to the post."
   },
   "addTagsOpt": {
     "message": "#Tags",
@@ -43,6 +83,14 @@
     "message": "Mittelung",
     "description": "Label: Ask always to insert a message when publishing a content."
   },
+  "addPageLink": {
+    "message": "Link",
+    "description": "Label: Insert a link to the page."
+  },
+  "addPageLinkHelp": {
+    "message": "Füge einen Verweis auf die Quelle in dein Post ein.",
+    "description": "Help: Add a reference to the page in your post."
+  },
   "addTitleOpt": {
     "message": "Seiten-Titel",
     "description": "Label: Insert page title when publishing a content."
@@ -51,12 +99,24 @@
     "message": "Seiten-URL",
     "description": "Label: Insert page URL when publishing a content."
   },
+  "addPreview": {
+    "message": "Vorschau",
+    "description": "Label: Insert media when sharing a page."
+  },
+  "addPreviewHelp": {
+    "message": "Füge eine Vorschau auf Inhalte verschiedener Art in dein Post ein.",
+    "description": "Help:  Insert media when sharing a page."
+  },
+  "addImageOpt": {
+    "message": "Bilder",
+    "description": "Label: Shows image selector prompt when publishing a content."
+  },
   "addYTOpt": {
-    "message": "YouTube-Vorschau",
+    "message": "YouTube",
     "description": "Label: Insert youtube preview image when sharing a video."
   },
   "addVMOpt": {
-    "message": "Vimeo-Vorschau",
+    "message": "Vimeo",
     "description": "Label: Insert vimeo preview image when sharing a video."
   },
   "addMsg": {
@@ -75,6 +135,14 @@
     "message": "Deine #tags ...",
     "description": "Prompt: Add #tags here."
   },
+  "shortOpt": {
+    "message": "URL-Verkürzer",
+    "description": "Label: Select Short URL service:"
+  },
+  "shortOptHelp": {
+    "message": "Verkürze die URLs in deinem Post.",
+    "description": "Help: Select Short URL service:"
+  },
   "enableNotify": {
     "message": "Aktiviere Benachrichtigungen",
     "description": "Label: Enable notifications option"
@@ -86,5 +154,13 @@
   "minutes": {
     "message": "Minuten",
     "description": "Label: Minutes"
+  },
+  "githubLink": {
+    "message": "GitHub-Project",
+    "description": "Label: Github Project"
+  },
+  "extProjectAbout": {
+    "message": "Dies ist Freie Software, nimm an der Entwicklung teil im ",
+    "description": "Text: Description and link to the Github Project"
   }
 }
