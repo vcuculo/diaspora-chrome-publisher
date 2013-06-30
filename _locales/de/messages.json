@@ -47,10 +47,6 @@
     "message": "Speichern",
     "description": "Action: Save the Pod options."
   },
-  "optionsTitle": {
-    "message": "Optionen für die Diaspora* Publisher Erweiterung",
-    "description": "Title: Options for the Diaspora* Publisher extension"
-  },
   "setPodUrl": {
     "message": "Gib deinen Diaspora*-Pod an, bevor du die Erweiterung nutzen kannst.",
     "description": "Alert: Set your Diaspora* Pod Url before use."

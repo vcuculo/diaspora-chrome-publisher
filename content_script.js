@@ -16,11 +16,10 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-
+var port = chrome.extension.connect();
 var links = document.getElementsByTagName("link");
 var images = document.getElementsByTagName("img");
 var image = null;
-var port = chrome.extension.connect();
 
 port.postMessage({type : "getImg"});
 
@@ -104,38 +103,38 @@ function chooseImage(images){
   var elems = '';
   var cols = 7;
 
-  $('#dp-imageselect').remove();
+  $('#myModal').remove();
 
-  var html = '<div id="dp-imageselect"><div id="ui-overlay" class="ui-overlay"><div class="ui-widget-overlay"></div>';
+  var html = '<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">\
+                <div class="modal-header">\
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>\
+                </div>\
+                <div class="modal-body">\
+                  <ul class="thumbnails">\
+                  </ul>\
+                </div>\
+              </div>';
+
+  $("body").append(html);
 
   for (var i=0; i<images.length; i++){
 
     min = Math.min(images[i].width, images[i].height);
     max = Math.max(images[i].width, images[i].height);
-    
+    console.log(max);
     if (min/max > 0.3 && max >= 100 && min >= 100){
-     var imgSrc = images[i].src;
-     if (c % cols == 0 && c > 0)
-       elems += '</tr><tr>';
-     elems += '<td class="dthumb"><li><a href="#"><img src="'+ imgSrc +'"></a></li></td>';
+      if(images[i].getAttribute('data-original'))
+       var imgSrc = images[i].getAttribute('data-original');
+      else
+       var imgSrc = images[i].src;
+     elems += '<li class="span2"><a href="#"><img src="'+ imgSrc +'"></a></li>';
      c++;
     }    
   }
 
   if (c > 0){
-    width = ((c < cols) ? c : cols ) * 114;
-    height = Math.ceil(c / cols) * 114;
-    html += '<div class="ui-widget-shadow ui-corner-all" style="width: '+ (width + 20) +'px;';
-    html += ' height: '+ (height + 20) +'px; position: absolute; left: 50px; top: 30px; z-index:9999"></div></div>';
-    html += '<div style="position: absolute; width: '+ width +'px; height: '+ height +'px;left: 50px;';
-    html += ' top: 30px; padding: 10px; overflow: block; z-index:9999" class="ui-widget ui-widget-content ui-corner-all">';
-    html += '<ul id="thumbs"><table id="dthumbs"><tr>';
-
-    html += elems;
-
-    html += '</table></ul></div></div>';
-    $("body").append(html);
-    $("body").animate({scrollTop:0}, 'slow');
+    $('.thumbnails').html(elems);
+    $('#myModal').modal('show');
   }
   else{
     sendMess(false);
@@ -143,16 +142,16 @@ function chooseImage(images){
   }
   var thumbs = $('#dthumbs td');
 
-  document.getElementById("ui-overlay").addEventListener('click', function() {
-    $('#dp-imageselect').remove();
+  $('#myModal').on('hidden', function () {
+    $('#myModal').remove();
     sendMess(false);
-  }, false);
+  });
 
   for (var i=0;i<thumbs.length;i++){
     thumbs[i].addEventListener('click', function() {
       var imgSrc = this.getElementsByTagName("img")[0].getAttribute("src");
       sendMess(false, encodeURIComponent(imgSrc));
-      $('#dp-imageselect').remove();
+      $('#myModal').remove();
     }, false);
   }
 }

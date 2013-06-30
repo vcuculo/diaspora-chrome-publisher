@@ -188,6 +188,13 @@ chrome.extension.onConnect.addListener(function(port) {
 
 // Called when the user clicks on the browser action icon.
 chrome.browserAction.onClicked.addListener(function(tab) {
+
+  // Inject needed scripts and css
+  chrome.tabs.executeScript(null, {file: "js/jquery.min.js"});
+  chrome.tabs.executeScript(null, {file: "js/bootstrap.min.js"});
+  chrome.tabs.insertCSS(null, {file: "css/bootstrap.css"});
+
+
   getPod();
 
   if (podUrl.indexOf("http") == -1)
