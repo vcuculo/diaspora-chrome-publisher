@@ -46,7 +46,7 @@ function getNotifications(){
   $.ajax({
     type: 'GET',
     dataType: 'json',
-    url: podUrl + "/notifications.json",
+    url: 'https://' + podUrl + "/notifications.json",
     success: function (result) {
       showNotifications(result);
     },
