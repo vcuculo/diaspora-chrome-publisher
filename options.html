@@ -21,7 +21,6 @@
     <title>Diaspora Publisher Options</title>
     <link href="css/bootstrap.css" rel="stylesheet">
     <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/jquery-ui-1.8.16.custom.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/options.js"></script>
     <style>
@@ -36,13 +35,13 @@
           <div class="control-group">
             <label id="podOpt" for="pod" class="control-label"></label>
             <div class="controls">
-            	<input id="pod" name="podurl" size="30" class="ui-autocomplete-input">
+            	<input id="pod" name="podurl" data-provide="typeahead" autocomplete="off">
               <p id="choosePod" class="help-block"></p>
             </div>
           </div>
           <div class="control-group">
             <div class="controls">
-              <input id="savepod" type="submit" class="btn btn-primary">
+              <input type="button" class="btn btn-primary" id="savepod"/>
             </div>
           </div>
         </fieldset>
@@ -136,7 +135,7 @@
             <label id="checkEvery" for="minutes" class="optioninput control-label"></label>
             <div class="controls">
               <div class="input-append">
-                <select id="minutes">
+                <select id="minutes" class="span1">
                   <option value="60000">1</option>
                   <option value="300000">5</option>
                   <option value="600000">10</option>

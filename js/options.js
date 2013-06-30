@@ -1,7 +1,7 @@
 
 var remoteList		= "http://podupti.me/api.php?key=4r45tg";
 var localList		= "podlist.txt";
-var defaultPlaceholder	= "https://www.joindiaspora.com";
+var defaultPlaceholder	= "joindiaspora.com";
 var pods = new Array();
 
 function localize() {
@@ -98,13 +98,6 @@ function saveOption(){
   }
 }
 
-function combo(thelist, theinput) {
-  theinput = document.getElementById(theinput);  
-  var idx = thelist.selectedIndex;
-  var content = thelist.options[idx].value;
-  theinput.value = content;	
-}
-
 function updatePodsRemotely() {
   var i = 0;
   $.get(remoteList, function(data) {
@@ -116,7 +109,7 @@ function updatePodsRemotely() {
            podName = this.substring(start , end);
            pods[i++] = podValue;
 	}); // if remote podlist is unreachable, load local podlist
-        $("input#pod").autocomplete({source: pods});
+        $("input#pod").typeahead({source: pods});
   }).error(function() { updatePodsLocally();});
 }
 
@@ -129,7 +122,7 @@ function updatePodsLocally(){
       podName = this.substring(0);
       pods[i++] = podName;
     });
-    $("input#pod").autocomplete({source: pods}); 
+    $("input#pod").typeahead({source: pods}); 
   });
 }
 
@@ -165,6 +158,13 @@ function main() {
   $('input').click(function() {saveOption();});
   $('#savepod').click(function() {submit();});
   $('#minutes').change(function() {saveOption();});
+
+  $("input#pod").keypress(function(event) {
+    if (event.which == 13) {
+        event.preventDefault();
+        submit();
+    }
+  });
 }
 
 window.addEventListener('load', main);

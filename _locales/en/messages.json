@@ -51,10 +51,6 @@
     "message": "Set your Diaspora* pod before use.",
     "description": "Alert: Set your Diaspora* Pod Url before use."
   },
-  "addImageOpt": {
-    "message": "Images",
-    "description": "Label: Shows image selector prompt when publishing a content."
-  },
   "addMarkup": {
     "message": "Markup",
     "description": "Label: Use Markup to structure contents."
@@ -107,12 +103,16 @@
     "message": "Add a preview of the content to your posting.",
     "description": "Help:  Insert media when sharing a page."
   },
+  "addImageOpt": {
+    "message": "Images",
+    "description": "Label: Shows image selector prompt when publishing a content."
+  },
   "addYTOpt": {
-    "message": "YouTube preview",
+    "message": "YouTube",
     "description": "Label: Insert youtube preview image when sharing a video."
   },
   "addVMOpt": {
-    "message": "Vimeo preview",
+    "message": "Vimeo",
     "description": "Label: Insert vimeo preview image when sharing a video."
   },
   "addMsg": {
