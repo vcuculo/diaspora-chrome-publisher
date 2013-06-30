@@ -105,9 +105,10 @@ function chooseImage(images){
 
   $('#myModal').remove();
 
-  var html = '<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">\
+  var html = '<div id="myModal" class="modal hide fade">\
                 <div class="modal-header">\
                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>\
+                  <b id="previewTitle"></b>\
                 </div>\
                 <div class="modal-body">\
                   <ul class="thumbnails">\
@@ -116,6 +117,7 @@ function chooseImage(images){
               </div>';
 
   $("body").append(html);
+  $("#previewTitle").html(chrome.i18n.getMessage("addPreview"));
 
   for (var i=0; i<images.length; i++){
 
@@ -140,18 +142,19 @@ function chooseImage(images){
     sendMess(false);
     return;
   }
-  var thumbs = $('#dthumbs td');
 
-  $('#myModal').on('hidden', function () {
-    $('#myModal').remove();
+  var thumbs = $('.thumbnails li');
+
+  $('.modal-backdrop, .close').on('click', function() {
+    $('#myModal').modal('hide');
     sendMess(false);
   });
 
   for (var i=0;i<thumbs.length;i++){
     thumbs[i].addEventListener('click', function() {
+      $('#myModal').modal('hide');
       var imgSrc = this.getElementsByTagName("img")[0].getAttribute("src");
       sendMess(false, encodeURIComponent(imgSrc));
-      $('#myModal').remove();
     }, false);
   }
 }

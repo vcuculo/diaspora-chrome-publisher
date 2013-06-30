@@ -194,7 +194,6 @@ chrome.browserAction.onClicked.addListener(function(tab) {
   chrome.tabs.executeScript(null, {file: "js/bootstrap.min.js"});
   chrome.tabs.insertCSS(null, {file: "css/bootstrap.css"});
 
-
   getPod();
 
   if (podUrl.indexOf("http") == -1)
