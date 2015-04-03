@@ -34,4 +34,4 @@ where `message` is the text that appears in extension, and `description` is just
 
 ### Donate
 
-**Flattr** [![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=mynameislasek&url=https://github.com/vcuculo/diaspora-chrome-publisher&title=Diaspora* Publisher&language=en_GB&tags=github&category=software) 
+[![Support via Gratipay](https://cdn.rawgit.com/gratipay/gratipay-badge/2.3.0/dist/gratipay.png)](https://gratipay.com/vcuculo/)
