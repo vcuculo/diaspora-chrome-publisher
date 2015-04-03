@@ -19,9 +19,13 @@
     "message": "About this extension",
     "description": "Title: About the Diaspora* Publisher extension"
   },
-  "urlSaved": {
-    "message": "Pod Url saved!",
-    "description": "Alert: Notification in options page"
+  "urlSavedTitle": {
+    "message": "Pod url saved!",
+    "description": "Alert: Notification title in options page"
+  },
+  "urlSavedBody": {
+    "message": "The pod url is now ",
+    "description": "Alert: Notification body in options page"
   },
   "podOptionsTitle": {
     "message": "Pod",
@@ -138,6 +142,10 @@
   "shortOptHelp": {
     "message": "Shorten the URLs in your posting.",
     "description": "Help: Select Short URL service:"
+  },
+  "noneOpt": {
+    "message": "None (original url)",
+    "description": "Label: No url shortner (original url)"
   },
   "enableNotify": {
     "message": "Enable notifications",

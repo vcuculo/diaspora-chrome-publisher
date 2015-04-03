@@ -38,6 +38,7 @@ function localize() {
 
   $("label[id='shortOpt']").append(chrome.i18n.getMessage("shortOpt"));
   $("p#shortOptHelp").append(chrome.i18n.getMessage("shortOptHelp"));
+  $("label[id='noneOpt']").append(chrome.i18n.getMessage("noneOpt"));
 
   $("legend#notificationOptionsTitle").html(chrome.i18n.getMessage("notificationOptionsTitle"));
   $("label[id='enableNotify']").append(chrome.i18n.getMessage("enableNotify"));
@@ -52,28 +53,25 @@ function localize() {
 }
 
 function submit() {
-  if (document.getElementById('pod').value != ""){
-    window.localStorage.podUrl = document.getElementById('pod').value;
-    document.getElementById('pod').placeholder = document.getElementById('pod').value;
+  var pod = document.getElementById('pod').value;
+  if (pod != ""){
+    window.localStorage.podUrl = pod;
+    document.getElementById('pod').placeholder = pod;
   }
   else
     window.localStorage.podUrl = document.getElementById('pod').placeholder;
 
   saveOption();
 
-  var notification = webkitNotifications.createNotification(
-  'icon.png',  // icon url
-  chrome.i18n.getMessage("urlSaved"),  // notification title
-  ''  // notification body text
-  );
-
-  notification.ondisplay = function() {
-  setTimeout(function() {
-    notification.cancel();
-  }, 1000);
+  var notifOpt =   
+  {
+    type: "basic",
+    title: chrome.i18n.getMessage("urlSavedTitle"),  // notification title
+    message: chrome.i18n.getMessage("urlSavedBody") + window.localStorage.podUrl,  // notification body text
+    iconUrl: 'icon.png'  // icon url
   };
 
-  notification.show();
+  var notification = chrome.notifications.create("", notifOpt, function(){});
 }
 
 function saveOption(){
@@ -88,8 +86,8 @@ function saveOption(){
   window.localStorage.notify = document.getElementById('notify').checked;
   window.localStorage.minutes = document.getElementById('minutes').value;
 
-  var short = document.getElementsByName('short');
-  window.localStorage.short = (short[0].checked) ? short[0].value : short[1].value;
+  //var short = document.getElementsByName('short');
+  window.localStorage.short = document.querySelector('input[name="short"]:checked').value;
 
   if (window.localStorage.notify == "true"){
     chrome.runtime.getBackgroundPage(function(background) {
@@ -152,6 +150,8 @@ function main() {
   var short = window.localStorage.short;
   if (short == "tiny")
     document.getElementsByName('short')[1].checked = true;
+  else if (short == "none")
+    document.getElementsByName('short')[2].checked = true;
   else
     document.getElementsByName('short')[0].checked = true;
 

@@ -11,7 +11,7 @@
     "message": "LocalStorage est requis pour changer l'adresse du pod.",
     "description": "Alert: Localstorage n'est pas supporté"
   },
-  "urlSaved": {
+  "urlSavedTitle": {
     "message": "Adresse du pod sauvée !",
     "description": "Alert: Notification dans la page des options"
   },

@@ -19,9 +19,13 @@
     "message": "About this extension",
     "description": "Title: About the Diaspora* Publisher extension"
   },
-  "urlSaved": {
-    "message": "Pod Url salvato!",
-    "description": "Alert: Notification in options page"
+  "urlSavedTitle": {
+    "message": "Pod url salvato!",
+    "description": "Alert: Notification title in options page"
+  },
+  "urlSavedBody": {
+    "message": "L'url del pod ora è ",
+    "description": "Alert: Notification body in options page"
   },
   "podOptionsTitle": {
     "message": "Pod",
@@ -139,6 +143,10 @@
     "message": "Riduce la dimensione della URL nei tuoi post.",
     "description": "Help: Select Short URL service:"
   },
+  "noneOpt": {
+    "message": "Nessuno (url originale)",
+    "description": "Label: No url shortner (long url)"
+  },
   "enableNotify": {
     "message": "Abilita notifiche",
     "description": "Label: Enable notifications option"
@@ -152,7 +160,7 @@
     "description": "Label: Minuti"
   },
   "githubLink": {
-    "message": "GitHub project",
+    "message": "GitHub",
     "description": "Label: Github Project"
   },
   "extProjectAbout": {

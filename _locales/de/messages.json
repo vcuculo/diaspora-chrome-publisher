@@ -19,7 +19,7 @@
     "message": "Über diese Erweiterung",
     "description": "Title: About the Diaspora* Publisher extension"
   },
-  "urlSaved": {
+  "urlSavedTitle": {
     "message": "Pod Url gespeichert!",
     "description": "Alert: Notification in options page"
   },

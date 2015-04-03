@@ -1,7 +1,7 @@
 {
     "name": "Diaspora* Publisher",
     "description": "__MSG_extDescription__",
-    "version": "1.9.6",
+    "version": "1.9.7",
     "manifest_version": 2,
     "default_locale": "en",
     "background": {

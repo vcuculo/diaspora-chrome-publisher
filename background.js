@@ -1,6 +1,6 @@
 /*
  * Diaspora* Publisher extension.
- * Copyright (C) 2012  Vittorio Cuculo <vittorio.cuculo@gmail.com>
+ * Copyright (C) 2015  Vittorio Cuculo <me@vcuculo.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -76,7 +76,7 @@ function showNotifications(result){
 function googlurl(url, cb) {
   $.ajax({
     type: 'POST',
-    url: "https://www.googleapis.com/urlshortener/v1/url",
+    url: "https://www.googleapis.com/urlshortener/v1/url?key=AIzaSyBga1CKqUOlLGZcOkMZSF-m-Xe1PbM-C4s",
     contentType: 'application/json',
     data: JSON.stringify({longUrl: url}),
     success: function (m) {
@@ -149,7 +149,7 @@ function postMessage(tab_id, subject, url, selection, image) {
   }
   action_url += " <br><sub>&url=[via Diaspora* Publisher](" + encodeURIComponent("http://goo.gl/tmeFB") + ") -</sub>&v=1&";
 
-  if (!window.open(action_url+'noui=1&jump=doclose','diasporav1','location=yes,links=no,scrollbars=no,toolbar=no,width=590,height=250'))
+  if (!window.open(action_url+'noui=1&jump=doclose','diasporav1','location=yes,links=no,scrollbars=no,toolbar=no,width=590,height=450'))
     location.href = action_url+'jump=yes';
 }
 
@@ -169,7 +169,7 @@ chrome.extension.onConnect.addListener(function(port) {
       if (tab.url.length > max_url_length && info.video == false)
         if (getOpt("short") == "tiny")
           tinyurl(tab.url, function(shorturl) { postMessage(tab.id, info.title, shorturl, info.selection, info.image); });
-        else
+        else if (getOpt("short") == "google")
           googlurl(tab.url, function(shorturl) { postMessage(tab.id, info.title, shorturl, info.selection, info.image); });
 
       else if (info.video == true && getOpt("ytimg") == "false")

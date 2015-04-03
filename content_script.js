@@ -1,6 +1,6 @@
 /*
  * Diaspora* Publisher extension.
- * Copyright (C) 2012  Vittorio Cuculo <vittorio.cuculo@gmail.com>
+ * Copyright (C) 2015  Vittorio Cuculo <me@vcuculo.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -123,7 +123,6 @@ function chooseImage(images){
 
     min = Math.min(images[i].width, images[i].height);
     max = Math.max(images[i].width, images[i].height);
-    console.log(max);
     if (min/max > 0.3 && max >= 100 && min >= 100){
       if(images[i].getAttribute('data-original'))
        var imgSrc = images[i].getAttribute('data-original');
