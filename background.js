@@ -117,7 +117,7 @@ function getOpt(opt){
 
 function postMessage(tab_id, subject, url, selection, image) {
   var action_url = podUrl + "/bookmarklet?title=";
-debugger;
+
   if (getOpt("msg") == "true"){
     var msg = prompt(chrome.i18n.getMessage("addMsg"), chrome.i18n.getMessage("addMsgText"));
     if (msg && msg !== "") {
