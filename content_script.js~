@@ -20,7 +20,7 @@ var port = chrome.extension.connect();
 var links = document.getElementsByTagName("link");
 var images = document.getElementsByTagName("img");
 var image = null;
-
+debugger;
 port.postMessage({type : "getImg"});
 
 port.onMessage.addListener(function(msg) {

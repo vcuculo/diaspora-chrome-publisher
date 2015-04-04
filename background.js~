@@ -166,19 +166,19 @@ chrome.extension.onConnect.addListener(function(port) {
         info.selection = info.selection.substring(0, max_length);
 
       // If is video keep original url, otherwise embedding doesnt work
-      if (tab.url.length > max_url_length && info.video == false){
+      if (tab.url.length > max_url_length && info.video == false)
         if (getOpt("short") == "tiny")
           tinyurl(tab.url, function(shorturl) { postMessage(tab.id, info.title, shorturl, info.selection, info.image); });
         else if (getOpt("short") == "google")
           googlurl(tab.url, function(shorturl) { postMessage(tab.id, info.title, shorturl, info.selection, info.image); });
 
-      }else if (info.video == true && getOpt("ytimg") == "false"){
+      else if (info.video == true && getOpt("ytimg") == "false")
         postMessage(tab.id, info.title, tab.url, info.selection, null);
       
-      }else if (info.video == true && getOpt("vmimg") == "false"){
+      else if (info.video == true && getOpt("vmimg") == "false")
         postMessage(tab.id, info.title, tab.url, info.selection, null);
 
-      }else
+      else
         postMessage(tab.id, info.title, tab.url, info.selection, info.image);
     }
     else if (info.type == "getImg")
